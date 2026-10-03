@@ -19,7 +19,7 @@ export default function WhyChooseUs() {
         <div className="flex w-full flex-col gap-8 md:flex-row md:gap-12 md:items-center">
           {/* Left section - Image */}
           <div className="w-full md:w-1/2">
-            <div className="bg-tertiary relative h-[400px] w-full overflow-hidden md:h-[500px]">
+            <div className="bg-tertiary relative h-400px w-full overflow-hidden md:h-500px">
               <Image
                 src={media.joshua}
                 alt="Why Choose Us"

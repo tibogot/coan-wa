@@ -88,7 +88,7 @@ export default function Gallery() {
               <AnimatedText>
                 <Link
                   href="/contact"
-                  className="bg-secondary hover:bg-secondary/90 inline-block w-fit cursor-pointer rounded-[1px] px-4 py-2 text-sm text-white transition-all duration-200 md:px-5 md:py-2.5 md:text-base"
+                  className="bg-secondary hover:bg-secondary/90 inline-block w-fit cursor-pointer rounded-px px-4 py-2 text-sm text-white transition-all duration-200 md:px-5 md:py-2.5 md:text-base"
                 >
                   Get in Touch
                 </Link>

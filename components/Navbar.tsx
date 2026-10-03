@@ -110,7 +110,7 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
-    <nav className="fixed top-8 left-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2 rounded-md bg-gradient-to-b from-black/10 via-black/10 to-black/5 px-6 py-2 backdrop-blur-xl md:w-full">
+    <nav className="fixed top-8 left-1/2 z-50 w-calc(100%-2rem) max-w-4xl -translate-x-1/2 rounded-md bg-linear-to-b from-black/10 via-black/10 to-black/5 px-6 py-2 backdrop-blur-xl md:w-full">
       {/* Top Bar - Logo, Nav, Contact */}
       <div className="flex w-full items-center">
         {/* Left Section - Logo */}
@@ -140,7 +140,7 @@ export default function Navbar() {
               href={link.href}
               onMouseEnter={() => warmHero(link.href)}
               onFocus={() => warmHero(link.href)}
-              className="cursor-pointer py-1 text-[0.95rem] tracking-wide text-white/90 transition-colors duration-200 hover:text-white/60"
+              className="cursor-pointer py-1 text-0.95rem tracking-wide text-white/90 transition-colors duration-200 hover:text-white/60"
             >
               {link.label}
             </Link>
@@ -154,7 +154,7 @@ export default function Navbar() {
             href="/contact"
             onMouseEnter={() => warmHero("/contact")}
             onFocus={() => warmHero("/contact")}
-            className="bg-secondary hover:bg-secondary hidden cursor-pointer rounded-[1px] px-4 py-2 text-[0.95rem] tracking-wide text-white transition-all duration-200 md:block"
+            className="bg-secondary hover:bg-secondary hidden cursor-pointer rounded-px px-4 py-2 text-0.95rem tracking-wide text-white transition-all duration-200 md:block"
           >
             Contact
           </Link>
@@ -192,7 +192,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={() => setIsOpen(false)}
-            className="bg-secondary hover:bg-secondary cursor-pointer rounded-[1px] px-4 py-3 text-base text-white no-underline"
+            className="bg-secondary hover:bg-secondary cursor-pointer rounded-px px-4 py-3 text-base text-white no-underline"
           >
             Contact
           </Link>

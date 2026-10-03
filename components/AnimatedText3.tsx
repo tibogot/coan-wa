@@ -92,7 +92,8 @@ function AnimatedText({
 
         childEls.forEach((child, index) => {
           try {
-            child.offsetHeight;
+            // Force layout so SplitText measures after fonts settle
+            void child.offsetHeight;
 
             const split = SplitText.create(child, {
               type: "lines",

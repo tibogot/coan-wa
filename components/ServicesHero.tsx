@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, SplitText, ScrollTrigger } from "@/lib/gsap";
-import AnimatedText from "./AnimatedText3";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -505,7 +504,7 @@ export default function ServicesHero() {
       </div>
 
       {/* Overlay gradient for mobile to ensure text readability */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent md:hidden" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-r from-white/95 via-white/80 to-transparent md:hidden" />
     </section>
   );
 }

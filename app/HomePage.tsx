@@ -71,7 +71,7 @@ export default function HomePage() {
               width={850}
               height={260}
               priority
-              className="h-auto w-[min(60vw,520px)]"
+              className="h-auto w-min(60vw,520px)"
             />
             <AnimatedText isHero={true} delay={0.8} duration={0.8}>
               <p className="font-pp-neue-montreal mt-2 text-sm text-white md:text-base">
@@ -122,7 +122,7 @@ export default function HomePage() {
               </AnimatedText>
               <Link
                 href="/company"
-                className="bg-secondary hover:bg-secondary/90 inline-flex w-fit cursor-pointer items-center gap-2 rounded-[1px] px-4 py-2 text-sm text-white transition-all duration-200 md:px-5 md:py-2.5 md:text-base"
+                className="bg-secondary hover:bg-secondary/90 inline-flex w-fit cursor-pointer items-center gap-2 rounded-px px-4 py-2 text-sm text-white transition-all duration-200 md:px-5 md:py-2.5 md:text-base"
               >
                 Learn more <ArrowRight size={16} />
               </Link>

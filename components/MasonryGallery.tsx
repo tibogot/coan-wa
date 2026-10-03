@@ -70,7 +70,7 @@ export default function MasonryGallery({ images }: MasonryGalleryProps) {
               <div
                 key={`${colIndex}-${imgIndex}`}
                 className={`gallery-item group bg-tertiary relative overflow-hidden ${
-                  image.tall ? "h-[500px] md:h-[650px]" : "aspect-[4/3]"
+                  image.tall ? "h-500px md:h-650px" : "aspect-4/3"
                 }`}
               >
                 <Image
@@ -82,7 +82,7 @@ export default function MasonryGallery({ images }: MasonryGalleryProps) {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   quality={70}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </div>
             );
           })}

@@ -68,7 +68,7 @@ export default function Projects() {
         </div>
       </PageHero>
 
-      <section className="bg-primary relative min-h-[120vh] w-full overflow-hidden px-4 py-30 md:px-8">
+      <section className="bg-primary relative min-h-120vh w-full overflow-hidden px-4 py-30 md:px-8">
         <div className="relative z-10 mx-auto flex h-full w-full flex-col">
           <div className="text-left">
             <div className="mb-8 flex items-center gap-3">
@@ -93,7 +93,7 @@ export default function Projects() {
           <div className="mt-24 grid grid-cols-1 gap-8 md:mt-32 md:grid-cols-3 md:gap-12">
             {projects.map((project) => (
               <div key={project.image.src} className="group relative flex flex-col">
-                <div className="bg-tertiary relative h-[300px] w-full overflow-hidden md:h-[380px]">
+                <div className="bg-tertiary relative h-300px w-full overflow-hidden md:h-380px">
                   <Image
                     src={project.image}
                     alt={project.title}

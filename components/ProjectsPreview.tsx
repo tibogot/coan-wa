@@ -57,7 +57,7 @@ export default function ProjectsPreview() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
             {PROJECTS_PREVIEW.map((project) => (
               <div key={project.id} className="group relative flex flex-col">
-                <div className="bg-tertiary relative h-[300px] w-full overflow-hidden md:h-[380px]">
+                <div className="bg-tertiary relative h-300px w-full overflow-hidden md:h-380px">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -84,7 +84,7 @@ export default function ProjectsPreview() {
           <div className="mt-10 md:mt-14">
             <Link
               href="/projects"
-              className="bg-secondary hover:bg-secondary/90 inline-block w-fit cursor-pointer rounded-[1px] px-4 py-2 text-sm text-white transition-all duration-200 md:px-5 md:py-2.5 md:text-base"
+              className="bg-secondary hover:bg-secondary/90 inline-block w-fit cursor-pointer rounded-px px-4 py-2 text-sm text-white transition-all duration-200 md:px-5 md:py-2.5 md:text-base"
             >
               View All Projects
             </Link>
