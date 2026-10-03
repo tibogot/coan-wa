@@ -3,24 +3,109 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #fdfdfd;
+  --secondary: #ff3300;
+  --tertiary: #0f121d;
+  --orange: #ff4d00;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-orange: var(--orange);
+  --font-pp-neue-montreal: var(--font-pp-neue-montreal);
+  --font-pp-neue-montreal-mono: var(--font-pp-neue-montreal-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Heroes paint their own dark underlay; page chrome matches the draft (light). */
+html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  font-family:
+    var(--font-pp-neue-montreal),
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+.font-pp-neue-montreal {
+  font-family:
+    var(--font-pp-neue-montreal), Arial, Helvetica, sans-serif;
+}
+
+/* Soft crossfade between routes when the browser supports View Transitions */
+@supports (view-transition-name: none) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-timing-function: ease-out;
+  }
+}
+
+.font-pp-neue-montreal-mono {
+  font-family:
+    var(--font-pp-neue-montreal-mono), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.block-line-wrapper {
+  position: relative;
+  width: max-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-left .block-line-wrapper {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.block-line {
+  position: relative;
+  display: block;
+}
+
+.block-revealer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 101%;
+  height: 101%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 1;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.service.active .service-text {
+  color: #000;
 }
