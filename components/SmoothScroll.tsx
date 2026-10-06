@@ -9,6 +9,30 @@ function LenisScrollTriggerSync() {
 
   useEffect(() => {
     ScrollTrigger.refresh();
+
+    // ScrollTrigger only measures positions when refreshed. Anything that
+    // changes page height afterwards (font swap, SplitText re-wrapping, images,
+    // FAQ accordions opening) leaves triggers below it at stale positions, which
+    // is what makes scroll animations start too early or too late. Watch the
+    // document height and refresh (debounced) when it really changes.
+    let lastHeight = document.documentElement.scrollHeight;
+    let timer: number | undefined;
+
+    const observer = new ResizeObserver(() => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        const height = document.documentElement.scrollHeight;
+        if (Math.abs(height - lastHeight) < 2) return;
+        ScrollTrigger.refresh();
+        lastHeight = document.documentElement.scrollHeight;
+      }, 150);
+    });
+    observer.observe(document.body);
+
+    return () => {
+      window.clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return null;

@@ -10,6 +10,10 @@ import "./globals.css";
 
 const ppNeueMontreal = localFont({
   src: "./fonts/PP Neue Montreal-Variable.ttf",
+  // Variable font: wght axis is 200 (Thin) to 800 (Bold) and defaults to 200.
+  // Declaring the range lets CSS font-weight actually pick a weight instead of
+  // always rendering the Thin default.
+  weight: "200 800",
   display: "swap",
   variable: "--font-pp-neue-montreal",
   adjustFontFallback: "Arial",

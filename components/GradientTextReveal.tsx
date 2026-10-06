@@ -2,16 +2,16 @@
 
 import { useRef, ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
+import { gsap, SplitText } from "@/lib/gsap";
 
 interface GradientTextRevealProps {
   children: ReactNode;
   textColor?: string; // Grey color for initial state (default: #808080)
   highlightColor?: string; // Final color for reveal (default: #000000)
-  scrollDistance?: string; // Scroll distance for animation (default: "+=200%")
+  scrollDistance?: string; // ScrollTrigger end (default: "+=200%")
   stagger?: number; // Stagger between lines (default: 0.8)
   className?: string;
-  trigger?: string | HTMLElement; // Custom trigger element
+  trigger?: string | HTMLElement; // Custom trigger element (selector is resolved from the closest ancestor first)
   start?: string; // ScrollTrigger start (default: "top top")
 }
 
@@ -26,161 +26,101 @@ export default function GradientTextReveal({
   start = "top top",
 }: GradientTextRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const splitRefs = useRef<ReturnType<typeof SplitText.create>[]>([]);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useGSAP(() => {
-    if (!containerRef.current) return;
+  useGSAP(
+    () => {
+      const container = containerRef.current;
+      if (!container) return;
 
-    // Ensure element is in the DOM
-    if (!containerRef.current.isConnected) return;
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
 
-    // Wait for fonts to load
-    const initAnimation = async () => {
-      await document.fonts.ready;
-
-      // Small delay to ensure fonts are rendered
-      timeoutRef.current = setTimeout(() => {
-        if (!containerRef.current || !containerRef.current.isConnected) return;
-
-        // Clean up previous instances
-        if (timelineRef.current) {
-          timelineRef.current.kill();
-          timelineRef.current = null;
-        }
-        if (scrollTriggerRef.current) {
-          scrollTriggerRef.current.kill();
-          scrollTriggerRef.current = null;
-        }
-        splitRefs.current.forEach((split) => {
-          if (split) split.revert();
-        });
-        splitRefs.current = [];
-
-        // Find all heading elements (h1, h2, h3, h4, h5, h6) or use container directly
-        const headings = containerRef.current.querySelectorAll<HTMLElement>(
-          "h1, h2, h3, h4, h5, h6",
+      // Resolve the trigger relative to this instance so several reveals on the
+      // same page never grab each other's element.
+      const resolveTrigger = (): Element => {
+        if (!trigger) return container;
+        if (typeof trigger !== "string") return trigger;
+        return (
+          container.closest(trigger) ??
+          document.querySelector(trigger) ??
+          container
         );
+      };
 
-        const elementsToAnimate =
-          headings.length > 0 ? Array.from(headings) : [containerRef.current];
+      const headings = container.querySelectorAll<HTMLElement>(
+        "h1, h2, h3, h4, h5, h6",
+      );
+      const targets =
+        headings.length > 0 ? Array.from(headings) : [container];
 
-        // Get trigger element
-        const triggerElement = trigger
-          ? typeof trigger === "string"
-            ? document.querySelector(trigger) || containerRef.current
-            : trigger
-          : containerRef.current;
+      // autoSplit re-splits when fonts finish loading and when the container
+      // width changes, then calls onSplit again. The returned timeline is
+      // reverted/rebuilt automatically, so line breaks and scroll positions are
+      // always measured against the final layout.
+      const split = SplitText.create(targets, {
+        type: "lines",
+        linesClass: "gradient-text-line++",
+        autoSplit: true,
+        onSplit(self) {
+          const lines = self.lines.filter(
+            (line): line is HTMLElement =>
+              line instanceof HTMLElement && !!line.textContent?.trim(),
+          );
+          if (lines.length === 0) return undefined;
 
-        // Collect all lines from all elements
-        const allLines: HTMLElement[] = [];
-
-        elementsToAnimate.forEach((element) => {
-          // Create SplitText instance with lines only (no need for words)
-          const split = SplitText.create(element, {
-            type: "lines",
-            linesClass: "gradient-text-line++",
-          });
-
-          if (!split.lines || split.lines.length === 0) return;
-
-          splitRefs.current.push(split);
-
-          // Apply gradient styling to each line
-          split.lines.forEach((line) => {
-            if (
-              !line ||
-              !(line instanceof HTMLElement) ||
-              line.textContent?.trim() === ""
-            )
-              return;
-
-            // Text starts visible as grey, then smoothly transitions to black
-            // Gradient: black (left 50%) -> grey (right 50%)
+          // Text starts grey and sweeps to the highlight color (left to right).
+          // Gradient: highlight (right half) | grey (left half); position 0%
+          // shows grey, -100% shows highlight.
+          lines.forEach((line) => {
             Object.assign(line.style, {
               background: `linear-gradient(to left, ${highlightColor} 50%, ${textColor} 50%)`,
               backgroundSize: "200% 100%",
-              backgroundPosition: "0% 0%", // Start position - showing grey (right side)
+              backgroundPosition: reduceMotion ? "-100% 0%" : "0% 0%",
               color: "transparent",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               display: "inline-block",
               whiteSpace: "pre-wrap",
             });
-
-            allLines.push(line as HTMLElement);
           });
-        });
 
-        // Create single timeline for all elements
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: triggerElement,
-            start: start,
-            end: scrollDistance,
-            scrub: true,
-          },
-        });
+          if (reduceMotion) return undefined;
 
-        // Animate background position for all lines
-        // Text starts as grey, smoothly transitions to black as you scroll
-        // Start at 0% (showing grey), animate to -100% (revealing black)
-        if (allLines.length > 0) {
-          // Animate background position to reveal black color
-          tl.to(allLines, {
-            backgroundPosition: "-100% 0%",
-            duration: 1,
-            stagger: stagger,
-            ease: "none",
-          });
-        }
-
-        timelineRef.current = tl;
-        scrollTriggerRef.current = tl.scrollTrigger as ScrollTrigger;
-      }, 100);
-    };
-
-    initAnimation();
-
-    return () => {
-      // Clear timeout if it exists
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-
-      // Cleanup timeline and scroll trigger
-      if (timelineRef.current) {
-        try {
-          timelineRef.current.kill();
-        } catch {
-          // Ignore errors if already killed
-        }
-        timelineRef.current = null;
-      }
-
-      if (scrollTriggerRef.current) {
-        try {
-          scrollTriggerRef.current.kill();
-        } catch {
-          // Ignore errors if already killed
-        }
-        scrollTriggerRef.current = null;
-      }
-
-      // Revert SplitText instances
-      splitRefs.current.forEach((split) => {
-        try {
-          if (split) split.revert();
-        } catch {
-          // Ignore errors if already reverted
-        }
+          return gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: resolveTrigger(),
+                start,
+                end: scrollDistance,
+                scrub: true,
+                invalidateOnRefresh: true,
+              },
+            })
+            .to(lines, {
+              backgroundPosition: "-100% 0%",
+              duration: 1,
+              stagger,
+              ease: "none",
+            });
+        },
       });
-      splitRefs.current = [];
-    };
-  }, [textColor, highlightColor, scrollDistance, stagger, trigger, start]);
+
+      return () => split.revert();
+    },
+    {
+      scope: containerRef,
+      dependencies: [
+        textColor,
+        highlightColor,
+        scrollDistance,
+        stagger,
+        trigger,
+        start,
+      ],
+      revertOnUpdate: true,
+    },
+  );
 
   return (
     <div ref={containerRef} className={className}>

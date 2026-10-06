@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import ProfileGrid from "@/components/ProfileGrid";
 import AnimatedText from "@/components/AnimatedText3";
 import PageHero from "@/components/PageHero";
@@ -22,12 +22,12 @@ export default function Company() {
       <PageHero image={media.chuks} alt="Company Background">
         <div className="p-4 md:p-8 md:pb-12">
           <AnimatedText isHero={true}>
-            <h1 className="font-pp-neue-montreal mb-4 max-w-4xl text-left text-4xl text-white md:text-6xl">
+            <h1 className="font-pp-neue-montreal mb-4 max-w-4xl text-left text-4xl text-primary md:text-6xl">
               Building Excellence Across West Africa
             </h1>
           </AnimatedText>
           <AnimatedText isHero={true}>
-            <p className="font-pp-neue-montreal max-w-xl text-left text-base text-white/90 md:text-lg">
+            <p className="font-pp-neue-montreal max-w-xl text-left text-base text-primary/90 md:text-lg">
               Three decades of expertise in construction and engineering,
               delivering integrated solutions from planning to execution.
             </p>
@@ -40,7 +40,7 @@ export default function Company() {
           <div className="mb-8 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
             <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                 VISION
               </p>
             </AnimatedText>
@@ -48,7 +48,7 @@ export default function Company() {
           <div className="text-left">
             <div className="w-full md:w-1/2">
               <AnimatedText>
-                <h2 className="font-pp-neue-montreal text-secondary text-left text-4xl md:text-6xl">
+                <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-6xl">
                   Building the future of infrastructure across West Africa with
                   precision and innovation.
                 </h2>
@@ -58,19 +58,19 @@ export default function Company() {
           <div className="flex w-full gap-4 py-20">
             <div className="hidden w-1/2 md:block"></div>
             <div className="flex w-full flex-col md:w-1/2">
-              <div className="border-secondary mb-4 border-t"></div>
+              <div className="border-foreground mb-4 border-t"></div>
 
               <div className="flex flex-col gap-4 pb-4 md:flex-row">
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                    <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                       Our Mission
                     </h3>
                   </AnimatedText>
                 </div>
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                    <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                       We are committed to delivering world-class construction
                       and engineering solutions that transform communities and
                       drive economic growth across West Africa. Through
@@ -81,19 +81,19 @@ export default function Company() {
                 </div>
               </div>
 
-              <div className="border-secondary mb-4 border-t"></div>
+              <div className="border-foreground mb-4 border-t"></div>
 
               <div className="flex flex-col gap-4 pb-4 md:flex-row">
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                    <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                       Our Values
                     </h3>
                   </AnimatedText>
                 </div>
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                    <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                       Integrity, excellence, and innovation guide everything we
                       do. We prioritize safety, sustainability, and client
                       satisfaction in every project, ensuring lasting impact and
@@ -103,19 +103,19 @@ export default function Company() {
                 </div>
               </div>
 
-              <div className="border-secondary mb-4 border-t"></div>
+              <div className="border-foreground mb-4 border-t"></div>
 
               <div className="flex flex-col gap-4 md:flex-row">
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                    <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                       Our Vision
                     </h3>
                   </AnimatedText>
                 </div>
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                    <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                       To be the leading construction and engineering firm in
                       West Africa, recognized for transforming infrastructure
                       through cutting-edge technology, sustainable practices,
@@ -133,7 +133,7 @@ export default function Company() {
       <div className="bg-primary px-4 md:px-8">
         <div className="mb-8 flex items-center gap-3">
           <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-          <p className="font-pp-neue-montreal-mono text-secondary text-left text-xs md:text-sm">
+          <p className="font-pp-neue-montreal-mono text-foreground text-left text-xs md:text-sm">
             LEADERSHIP
           </p>
         </div>
@@ -149,7 +149,7 @@ export default function Company() {
         />
         <div className="relative z-10 p-4 md:p-8 md:pb-12">
           <AnimatedText isHero={true}>
-            <p className="font-pp-neue-montreal max-w-6xl text-left text-2xl text-white md:text-6xl">
+            <p className="font-pp-neue-montreal max-w-6xl text-left text-2xl text-primary md:text-6xl">
               Transforming landscapes and shaping futures through innovative
               construction solutions and engineering excellence across West
               Africa.

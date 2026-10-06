@@ -38,7 +38,7 @@ export default function ProjectsPreview() {
           <div className="mb-6 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
             <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                 PROJECTS
               </p>
             </AnimatedText>
@@ -47,7 +47,7 @@ export default function ProjectsPreview() {
           {/* Title */}
           <div className="mb-10 md:mb-14">
             <AnimatedText>
-              <h2 className="font-pp-neue-montreal text-secondary text-left text-4xl md:text-4xl">
+              <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-4xl">
                 Featured Projects
               </h2>
             </AnimatedText>
@@ -69,10 +69,10 @@ export default function ProjectsPreview() {
                   />
                 </div>
                 <div className="mt-4">
-                  <p className="font-pp-neue-montreal-mono text-secondary mb-2 text-left text-sm uppercase md:text-sm">
+                  <p className="font-pp-neue-montreal-mono text-foreground mb-2 text-left text-sm uppercase md:text-sm">
                     {project.status}
                   </p>
-                  <h3 className="font-pp-neue-montreal text-secondary text-left text-lg md:text-xl">
+                  <h3 className="font-pp-neue-montreal text-foreground text-left text-lg md:text-xl">
                     {project.title}
                   </h3>
                 </div>
@@ -84,7 +84,7 @@ export default function ProjectsPreview() {
           <div className="mt-10 md:mt-14">
             <Link
               href="/projects"
-              className="bg-secondary hover:bg-secondary/90 inline-block w-fit cursor-pointer rounded-px px-4 py-2 text-sm text-white transition-all duration-200 md:px-5 md:py-2.5 md:text-base"
+              className="font-pp-neue-montreal-mono bg-secondary text-foreground hover:bg-secondary/90 inline-block w-fit cursor-pointer rounded-px px-5 py-2.5 text-xs tracking-wide uppercase transition-colors duration-200 md:px-6 md:py-3"
             >
               View All Projects
             </Link>

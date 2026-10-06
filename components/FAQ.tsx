@@ -116,7 +116,7 @@ export default function FAQ() {
             <div className="flex items-center gap-3">
               <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
               <AnimatedText>
-                <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+                <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                   FAQ
                 </p>
               </AnimatedText>
@@ -127,28 +127,28 @@ export default function FAQ() {
           <div className="md:col-span-8">
             <div className="mb-10 md:mb-14">
               <AnimatedText>
-                <h2 className="font-pp-neue-montreal text-secondary mb-6 text-left text-4xl md:text-4xl">
+                <h2 className="font-pp-neue-montreal text-foreground mb-6 text-left text-4xl md:text-4xl">
                   Questions, answered.
                 </h2>
               </AnimatedText>
             </div>
 
             {/* FAQ Items */}
-            <div className="divide-secondary/25 divide-y">
+            <div className="divide-foreground/25 divide-y">
               {FAQ_DATA.map((faq, index) => (
                 <div key={index} className="group">
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="text-secondary hover:text-secondary/80 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors duration-200 md:py-6"
+                    className="text-foreground hover:text-foreground/80 flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors duration-200 md:py-6"
                     aria-expanded={openIndex === index}
                     aria-controls={`${baseId}-faq-panel-${index}`}
                   >
-                    <h3 className="font-pp-neue-montreal text-secondary pr-8 text-base md:text-xl">
+                    <h3 className="font-pp-neue-montreal text-foreground pr-8 text-base md:text-xl">
                       {faq.question}
                     </h3>
                     <div className="shrink-0">
                       <svg
-                        className={`text-secondary h-6 w-6 transform transition-transform duration-300 ${
+                        className={`text-foreground h-6 w-6 transform transition-transform duration-300 ${
                           openIndex === index ? "rotate-180" : ""
                         }`}
                         fill="none"
@@ -177,7 +177,7 @@ export default function FAQ() {
                       }}
                       className="pb-4 md:pb-6"
                     >
-                      <p className="font-pp-neue-montreal text-secondary/70 text-base leading-relaxed md:text-lg">
+                      <p className="font-pp-neue-montreal text-foreground/70 text-base leading-relaxed md:text-lg">
                         {faq.answer}
                       </p>
                     </div>

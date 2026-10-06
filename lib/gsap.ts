@@ -16,6 +16,10 @@ gsap.registerPlugin(
   InertiaPlugin,
 );
 
+// Mobile URL-bar show/hide fires resize events; refreshing on those makes
+// pinned sections jump. Real width changes are handled by components.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 export {
   gsap,
   useGSAP,

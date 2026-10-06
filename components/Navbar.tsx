@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
+import { useLenis } from "lenis/react";
 import { gsap } from "@/lib/gsap";
 import { routeHeroes } from "@/lib/media";
 
@@ -22,9 +24,65 @@ function warmHero(href: string) {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [solid, setSolid] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuContainerRef = useRef<HTMLDivElement>(null);
+  const lastScrollRef = useRef(0);
+  const hiddenRef = useRef(false);
+  const isOpenRef = useRef(isOpen);
+  isOpenRef.current = isOpen;
+
+  const slideNav = (hide: boolean) => {
+    if (hiddenRef.current === hide || !navRef.current) return;
+    hiddenRef.current = hide;
+    gsap.to(navRef.current, {
+      yPercent: hide ? -100 : 0,
+      duration: 0.5,
+      ease: hide ? "power3.inOut" : "power3.out",
+      overwrite: "auto",
+    });
+  };
+
+  // Transparent over the hero; soft-white once the hero has mostly scrolled away.
+  // Slide away on scroll down, slide back on scroll up (stays visible near the top
+  // and while the mobile menu is open).
+  useLenis(({ scroll, direction }) => {
+    const solidThreshold = Math.max(window.innerHeight * 0.7, 120);
+    const nextSolid = scroll > solidThreshold;
+    setSolid((prev) => (prev === nextSolid ? prev : nextSolid));
+
+    if (isOpenRef.current || scroll < 64) {
+      slideNav(false);
+      lastScrollRef.current = scroll;
+      return;
+    }
+
+    const delta = scroll - lastScrollRef.current;
+    if (Math.abs(delta) < 4) return;
+
+    if (direction === 1) {
+      slideNav(true);
+    } else if (direction === -1) {
+      slideNav(false);
+    }
+
+    lastScrollRef.current = scroll;
+  });
+
+  // Reset to the hero (transparent) look on every route change.
+  useEffect(() => {
+    setSolid(false);
+    setIsOpen(false);
+    lastScrollRef.current = 0;
+    hiddenRef.current = false;
+    if (navRef.current) {
+      gsap.killTweensOf(navRef.current);
+      gsap.set(navRef.current, { yPercent: 0 });
+    }
+  }, [pathname]);
 
   // Animate menu open/close with GSAP
   useEffect(() => {
@@ -32,37 +90,29 @@ export default function Navbar() {
 
     const menuItems = menuContainerRef.current.querySelectorAll("a");
 
-    // Kill any existing animations
     gsap.killTweensOf([menuRef.current, menuItems]);
 
     if (isOpen) {
-      // Show menu first so we can query items
       menuRef.current.style.display = "block";
 
-      // Get fresh reference to items now that menu is visible
       const items = menuContainerRef.current.querySelectorAll("a");
 
-      // Measure height
       menuRef.current.style.height = "auto";
       const height = menuRef.current.scrollHeight;
       menuRef.current.style.height = "0px";
 
-      // Set initial state for items
       items.forEach((item) => {
         gsap.set(item, { opacity: 0, y: -10 });
       });
 
-      // Create timeline for smooth animation
       const tl = gsap.timeline();
 
-      // Expand container
       tl.to(menuRef.current, {
         height: height,
         duration: 0.4,
         ease: "power2.out",
       });
 
-      // Fade in and stagger items
       tl.to(
         items,
         {
@@ -75,10 +125,8 @@ export default function Navbar() {
         "-=0.2",
       );
     } else {
-      // Get fresh reference to items
       const items = menuContainerRef.current.querySelectorAll("a");
 
-      // Create timeline for closing
       const tl = gsap.timeline({
         onComplete: () => {
           if (menuRef.current) {
@@ -87,7 +135,6 @@ export default function Navbar() {
         },
       });
 
-      // Fade out items first
       tl.to(items, {
         opacity: 0,
         y: -10,
@@ -96,7 +143,6 @@ export default function Navbar() {
         ease: "power2.in",
       });
 
-      // Collapse container
       tl.to(
         menuRef.current,
         {
@@ -109,8 +155,22 @@ export default function Navbar() {
     }
   }, [isOpen]);
 
+  const linkTone = solid
+    ? "text-foreground hover:text-secondary"
+    : "text-primary/90 hover:text-secondary";
+
+  const contactTone =
+    "border-transparent bg-secondary text-foreground hover:bg-secondary/90";
+
   return (
-    <nav className="fixed top-8 left-1/2 z-50 w-calc(100%-2rem) max-w-4xl -translate-x-1/2 rounded-md bg-linear-to-b from-black/10 via-black/10 to-black/5 px-6 py-2 backdrop-blur-xl md:w-full">
+    <nav
+      ref={navRef}
+      className={`fixed top-0 left-0 z-50 w-full px-4 py-3 will-change-transform transition-[background-color,border-color] duration-500 ease-out md:px-8 ${
+        solid
+          ? "border-foreground/15 bg-primary border-b"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
       {/* Top Bar - Logo, Nav, Contact */}
       <div className="flex w-full items-center">
         {/* Left Section - Logo */}
@@ -122,12 +182,14 @@ export default function Navbar() {
             onFocus={() => warmHero("/")}
           >
             <Image
-              src="/images/newlogohero.svg"
+              src="/images/logo2026.svg"
               alt="COAN Logo"
-              width={110}
-              height={34}
+              width={130}
+              height={30}
               priority
-              className="h-5 w-auto md:h-6"
+              className={`h-5 w-auto transition-[filter] duration-500 ease-out md:h-6 ${
+                solid ? "brightness-0" : ""
+              }`}
             />
           </Link>
         </div>
@@ -140,7 +202,7 @@ export default function Navbar() {
               href={link.href}
               onMouseEnter={() => warmHero(link.href)}
               onFocus={() => warmHero(link.href)}
-              className="cursor-pointer py-1 text-0.95rem tracking-wide text-white/90 transition-colors duration-200 hover:text-white/60"
+              className={`font-pp-neue-montreal-mono cursor-pointer py-1 text-sm tracking-wide uppercase transition-colors duration-500 ease-out ${linkTone}`}
             >
               {link.label}
             </Link>
@@ -154,14 +216,16 @@ export default function Navbar() {
             href="/contact"
             onMouseEnter={() => warmHero("/contact")}
             onFocus={() => warmHero("/contact")}
-            className="bg-secondary hover:bg-secondary hidden cursor-pointer rounded-px px-4 py-2 text-0.95rem tracking-wide text-white transition-all duration-200 md:block"
+            className={`font-pp-neue-montreal-mono hidden cursor-pointer rounded-px border px-3.5 py-1.5 text-sm tracking-wide uppercase transition-all duration-500 ease-out md:block ${contactTone}`}
           >
             Contact
           </Link>
           {/* Mobile Menu Button - Mobile Only */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex cursor-pointer items-center justify-center border-none bg-transparent p-2 text-2xl text-white md:hidden"
+            className={`flex cursor-pointer items-center justify-center border-none bg-transparent p-2 text-2xl transition-colors duration-500 ease-out md:hidden ${
+              solid ? "text-foreground" : "text-primary"
+            }`}
             aria-label="Toggle menu"
           >
             {isOpen ? "✕" : "☰"}
@@ -172,7 +236,9 @@ export default function Navbar() {
       {/* Mobile Navigation - Expands below */}
       <div
         ref={menuRef}
-        className="overflow-hidden md:hidden"
+        className={`overflow-hidden transition-colors duration-500 ease-out md:hidden ${
+          solid ? "bg-primary" : "bg-tertiary"
+        }`}
         style={{ display: "none", height: 0 }}
       >
         <div
@@ -184,7 +250,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="cursor-pointer rounded px-4 py-3 text-base text-white/90 no-underline hover:bg-white/10"
+              className={`font-pp-neue-montreal-mono cursor-pointer rounded px-4 py-3 text-base uppercase no-underline transition-colors duration-200 ${linkTone}`}
             >
               {link.label}
             </Link>
@@ -192,7 +258,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={() => setIsOpen(false)}
-            className="bg-secondary hover:bg-secondary cursor-pointer rounded-px px-4 py-3 text-base text-white no-underline"
+            className={`font-pp-neue-montreal-mono cursor-pointer rounded-px border px-4 py-3 text-base uppercase no-underline transition-all duration-200 ${contactTone}`}
           >
             Contact
           </Link>

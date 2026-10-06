@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f0f0f0;
   --foreground: #171717;
-  --primary: #fdfdfd;
-  --secondary: #ff3300;
+  --primary: #f0f0f0;
+  --secondary: #ff5f02;
   --tertiary: #0f121d;
   --orange: #ff4d00;
 }
@@ -33,6 +33,8 @@ body {
     Arial,
     Helvetica,
     sans-serif;
+  /* PP Neue Montreal: 375 = Book, 450 = Regular, 530 = Medium */
+  font-weight: 450;
 }
 
 .font-pp-neue-montreal {

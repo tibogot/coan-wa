@@ -48,6 +48,7 @@ export default function GradientTextSection({
           scrub: true,
           pin: true,
           pinSpacing: false,
+          refreshPriority: 1,
         },
       });
     },
@@ -58,13 +59,14 @@ export default function GradientTextSection({
   if (!pin) {
     return (
       <section className={`relative w-full overflow-hidden ${className}`}>
-        <div className="gradient-text-trigger flex h-auto w-full items-center justify-center text-center">
+        <div className="flex h-auto w-full items-center justify-center text-center">
+          {/* No explicit trigger: the reveal uses its own text block, so it
+              measures exactly the text and never another instance. */}
           <GradientTextReveal
             textColor={textColor}
             highlightColor={highlightColor}
             scrollDistance={animationEnd || "bottom top"}
             stagger={stagger}
-            trigger=".gradient-text-trigger"
             start={animationStart || "top bottom"}
             className={contentClassName}
           >

@@ -11,7 +11,7 @@ export default function WhyChooseUs() {
         <div className="mb-8 flex items-center gap-3">
           <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
           <AnimatedText>
-            <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+            <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
               WHY CHOOSE US
             </p>
           </AnimatedText>
@@ -34,12 +34,12 @@ export default function WhyChooseUs() {
           {/* Right section - Title and 3 paragraphs */}
           <div className="flex w-full flex-col gap-6 md:w-1/2">
             <AnimatedText>
-              <h2 className="font-pp-neue-montreal text-secondary text-left text-4xl md:text-5xl">
+              <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-5xl">
                 Why Choose COANWA
               </h2>
             </AnimatedText>
             <AnimatedText>
-              <p className="font-pp-neue-montreal text-secondary text-left text-base md:text-lg">
+              <p className="font-pp-neue-montreal text-foreground text-left text-base md:text-lg">
                 With over three decades of experience in road construction and
                 civil engineering across West Africa, we bring unparalleled
                 expertise to every project. Our deep understanding of local
@@ -49,7 +49,7 @@ export default function WhyChooseUs() {
               </p>
             </AnimatedText>
             <AnimatedText>
-              <p className="font-pp-neue-montreal text-secondary text-left text-base md:text-lg">
+              <p className="font-pp-neue-montreal text-foreground text-left text-base md:text-lg">
                 Our integrated approach combines civil, mechanical, and electrical
                 engineering services, allowing us to manage complex projects
                 seamlessly from planning to execution. We prioritize quality,
@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
               </p>
             </AnimatedText>
             <AnimatedText>
-              <p className="font-pp-neue-montreal text-secondary text-left text-base md:text-lg">
+              <p className="font-pp-neue-montreal text-foreground text-left text-base md:text-lg">
                 Partner with us and benefit from our proven track record of
                 successfully completed projects, dedicated professional team, and
                 commitment to excellence. We build lasting infrastructure that

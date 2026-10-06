@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
@@ -119,12 +119,12 @@ export default function Services() {
       <PageHero image={media.sticky4} alt="Services Background">
         <div className="p-4 md:p-8 md:pb-12">
           <AnimatedText isHero={true}>
-            <h1 className="font-pp-neue-montreal mb-4 max-w-4xl text-left text-4xl text-white md:text-6xl">
+            <h1 className="font-pp-neue-montreal mb-4 max-w-4xl text-left text-4xl text-primary md:text-6xl">
               Comprehensive Construction Solutions
             </h1>
           </AnimatedText>
           <AnimatedText isHero={true}>
-            <p className="font-pp-neue-montreal max-w-xl text-left text-base text-white/90 md:text-lg">
+            <p className="font-pp-neue-montreal max-w-xl text-left text-base text-primary/90 md:text-lg">
               From civil engineering to mechanical and electrical services, we
               deliver integrated solutions for your infrastructure needs.
             </p>
@@ -137,7 +137,7 @@ export default function Services() {
           <div className="mb-8 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
             <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                 OUR SERVICES
               </p>
             </AnimatedText>
@@ -145,7 +145,7 @@ export default function Services() {
           <div className="flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-8">
             <div className="w-full text-left md:w-1/2">
               <AnimatedText>
-                <h2 className="font-pp-neue-montreal text-secondary text-left text-4xl md:text-6xl">
+                <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-6xl">
                   Integrated construction and engineering services tailored to
                   your project needs.
                 </h2>
@@ -153,7 +153,7 @@ export default function Services() {
             </div>
             <div className="flex w-full flex-col gap-6 md:w-1/2">
               <AnimatedText>
-                <p className="font-pp-neue-montreal text-secondary text-left text-base md:text-xl">
+                <p className="font-pp-neue-montreal text-foreground text-left text-base md:text-xl">
                   We provide comprehensive construction solutions across civil,
                   mechanical, and electrical engineering disciplines. Our team
                   of experts delivers end-to-end services from initial planning
@@ -174,31 +174,31 @@ export default function Services() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="border-secondary group flex flex-col border-t pt-6"
+                className="border-foreground group flex flex-col border-t pt-6"
               >
                 <AnimatedText>
                   <div className="mb-4 flex items-start justify-between">
-                    <h3 className="font-pp-neue-montreal text-secondary text-left text-2xl md:text-3xl">
+                    <h3 className="font-pp-neue-montreal text-foreground text-left text-2xl md:text-3xl">
                       {service.title}
                     </h3>
-                    <ArrowUpRight className="text-secondary mt-1 h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 md:h-6 md:w-6" />
+                    <ArrowUpRight className="text-foreground mt-1 h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 md:h-6 md:w-6" />
                   </div>
                 </AnimatedText>
                 <AnimatedText>
-                  <p className="font-pp-neue-montreal text-secondary/80 mb-6 text-left text-sm md:text-base">
+                  <p className="font-pp-neue-montreal text-foreground/80 mb-6 text-left text-sm md:text-base">
                     {service.description}
                   </p>
                 </AnimatedText>
                 <div className="mt-auto">
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal-mono text-secondary mb-3 text-xs md:text-sm">
+                    <p className="font-pp-neue-montreal-mono text-foreground mb-3 text-xs md:text-sm">
                       KEY CAPABILITIES
                     </p>
                   </AnimatedText>
                   <ul className="space-y-2">
                     {service.capabilities.map((capability, idx) => (
                       <AnimatedText key={idx}>
-                        <li className="font-pp-neue-montreal text-secondary flex items-start gap-2 text-sm md:text-base">
+                        <li className="font-pp-neue-montreal text-foreground flex items-start gap-2 text-sm md:text-base">
                           <span className="bg-secondary mt-1.5 h-1 w-1 shrink-0" />
                           {capability}
                         </li>
@@ -221,12 +221,12 @@ export default function Services() {
             <div
               data-count="6"
               data-suffix="+"
-              className="font-pp-neue-montreal text-secondary text-6xl tabular-nums md:text-8xl"
+              className="font-pp-neue-montreal text-foreground text-6xl tabular-nums md:text-8xl"
               style={{ letterSpacing: "-0.05em" }}
             >
               6+
             </div>
-            <div className="font-pp-neue-montreal text-secondary mt-2 text-sm md:text-base">
+            <div className="font-pp-neue-montreal text-foreground mt-2 text-sm md:text-base">
               service areas
             </div>
           </div>
@@ -234,12 +234,12 @@ export default function Services() {
             <div
               data-count="100"
               data-suffix="%"
-              className="font-pp-neue-montreal text-secondary text-6xl tabular-nums md:text-8xl"
+              className="font-pp-neue-montreal text-foreground text-6xl tabular-nums md:text-8xl"
               style={{ letterSpacing: "-0.05em" }}
             >
               100%
             </div>
-            <div className="font-pp-neue-montreal text-secondary mt-2 text-sm md:text-base">
+            <div className="font-pp-neue-montreal text-foreground mt-2 text-sm md:text-base">
               integrated solutions
             </div>
           </div>
@@ -247,12 +247,12 @@ export default function Services() {
             <div
               data-count="24"
               data-suffix="/7"
-              className="font-pp-neue-montreal text-secondary text-6xl tabular-nums md:text-8xl"
+              className="font-pp-neue-montreal text-foreground text-6xl tabular-nums md:text-8xl"
               style={{ letterSpacing: "-0.05em" }}
             >
               24/7
             </div>
-            <div className="font-pp-neue-montreal text-secondary mt-2 text-sm md:text-base">
+            <div className="font-pp-neue-montreal text-foreground mt-2 text-sm md:text-base">
               support available
             </div>
           </div>
@@ -260,11 +260,11 @@ export default function Services() {
       </section>
 
       <GradientTextSection
-        textColor="rgba(255, 51, 0, 0.3)"
-        highlightColor="#ff3300"
+        textColor="rgba(23, 23, 23, 0.3)"
+        highlightColor="#171717"
         pin={false}
-        animationStart="center bottom"
-        animationEnd="center 30%"
+        animationStart="top 80%"
+        animationEnd="bottom 50%"
         className="py-32 md:py-48"
         contentClassName="mx-auto w-full max-w-4xl px-4 md:px-8"
       >
@@ -282,32 +282,32 @@ export default function Services() {
                 <div className="mb-8 flex items-center gap-3">
                   <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+                    <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                       EXPERTISE
                     </p>
                   </AnimatedText>
                 </div>
                 <AnimatedText>
-                  <h2 className="font-pp-neue-montreal text-secondary text-left text-4xl md:text-5xl">
+                  <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-5xl">
                     Three decades of engineering excellence and innovation.
                   </h2>
                 </AnimatedText>
               </div>
             </div>
             <div className="flex w-full flex-col md:mt-60 md:w-1/2">
-              <div className="border-secondary mb-4 border-t"></div>
+              <div className="border-foreground mb-4 border-t"></div>
 
               <div className="flex flex-col gap-4 pb-4 md:flex-row">
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                    <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                       Our Approach
                     </h3>
                   </AnimatedText>
                 </div>
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                    <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                       We take an integrated approach to construction, combining
                       civil, mechanical, and electrical expertise to deliver
                       comprehensive solutions. Our team works collaboratively
@@ -318,19 +318,19 @@ export default function Services() {
                 </div>
               </div>
 
-              <div className="border-secondary mb-4 border-t"></div>
+              <div className="border-foreground mb-4 border-t"></div>
 
               <div className="flex flex-col gap-4 pb-4 md:flex-row">
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                    <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                       Quality Assurance
                     </h3>
                   </AnimatedText>
                 </div>
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                    <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                       Every project undergoes rigorous quality control processes
                       to ensure compliance with international standards. We
                       maintain the highest levels of safety, sustainability, and
@@ -341,19 +341,19 @@ export default function Services() {
                 </div>
               </div>
 
-              <div className="border-secondary mb-4 border-t"></div>
+              <div className="border-foreground mb-4 border-t"></div>
 
               <div className="flex flex-col gap-4 md:flex-row">
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                    <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                       Innovation
                     </h3>
                   </AnimatedText>
                 </div>
                 <div className="w-full md:w-1/2">
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                    <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                       We continuously invest in cutting-edge technologies and
                       methodologies to improve efficiency, reduce costs, and
                       enhance project outcomes. Our commitment to innovation
@@ -378,7 +378,7 @@ export default function Services() {
         />
         <div className="relative z-10 p-4 md:p-8 md:pb-12">
           <AnimatedText isHero={true}>
-            <p className="font-pp-neue-montreal max-w-6xl text-left text-2xl text-white md:text-6xl">
+            <p className="font-pp-neue-montreal max-w-6xl text-left text-2xl text-primary md:text-6xl">
               Transforming infrastructure across West Africa through
               comprehensive construction and engineering excellence.
             </p>

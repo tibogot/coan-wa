@@ -58,7 +58,7 @@ export default function MasonryGallery({ images }: MasonryGalleryProps) {
         },
       });
     });
-  }, [columns]);
+  }, { dependencies: [columns], scope: galleryRef, revertOnUpdate: true });
 
   return (
     <div ref={galleryRef} className="flex gap-4">

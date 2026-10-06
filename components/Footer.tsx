@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-tertiary w-full px-4 pt-10 pb-6 text-white md:px-8">
+    <footer className="bg-tertiary w-full px-4 pt-10 pb-6 text-primary md:px-8">
       <div className="flex flex-col justify-between gap-8">
         {/* Top Section */}
         <div className="flex flex-col gap-8 md:flex-row md:justify-between md:gap-4">
@@ -21,7 +21,7 @@ export default function Footer() {
                 style={{ width: "auto" }}
               />
             </Link>
-            <p className="font-pp-neue-montreal text-base leading-relaxed text-white/80">
+            <p className="font-pp-neue-montreal text-base leading-relaxed text-primary/80">
               A leading construction company offering integrated solutions and
               related services.
             </p>
@@ -34,7 +34,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/company"
-                    className="font-pp-neue-montreal cursor-pointer text-base text-white/80 transition-opacity hover:opacity-80 md:text-lg"
+                    className="font-pp-neue-montreal cursor-pointer text-base text-primary/80 transition-opacity hover:opacity-80 md:text-lg"
                   >
                     Company
                   </Link>
@@ -42,7 +42,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/services"
-                    className="font-pp-neue-montreal cursor-pointer text-base text-white/80 transition-opacity hover:opacity-80 md:text-lg"
+                    className="font-pp-neue-montreal cursor-pointer text-base text-primary/80 transition-opacity hover:opacity-80 md:text-lg"
                   >
                     Services
                   </Link>
@@ -50,7 +50,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/projects"
-                    className="font-pp-neue-montreal cursor-pointer text-base text-white/80 transition-opacity hover:opacity-80 md:text-lg"
+                    className="font-pp-neue-montreal cursor-pointer text-base text-primary/80 transition-opacity hover:opacity-80 md:text-lg"
                   >
                     Projects
                   </Link>
@@ -58,7 +58,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/gallery"
-                    className="font-pp-neue-montreal cursor-pointer text-base text-white/80 transition-opacity hover:opacity-80 md:text-lg"
+                    className="font-pp-neue-montreal cursor-pointer text-base text-primary/80 transition-opacity hover:opacity-80 md:text-lg"
                   >
                     Gallery
                   </Link>
@@ -66,7 +66,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="/contact"
-                    className="font-pp-neue-montreal cursor-pointer text-base text-white/80 transition-opacity hover:opacity-80 md:text-lg"
+                    className="font-pp-neue-montreal cursor-pointer text-base text-primary/80 transition-opacity hover:opacity-80 md:text-lg"
                   >
                     Contact
                   </Link>
@@ -79,7 +79,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="mailto:info@coanwa.com"
-                    className="font-pp-neue-montreal cursor-pointer text-base text-white/80 transition-opacity hover:opacity-80 md:text-lg"
+                    className="font-pp-neue-montreal cursor-pointer text-base text-primary/80 transition-opacity hover:opacity-80 md:text-lg"
                   >
                     info@coanwa.com
                   </a>
@@ -87,7 +87,7 @@ export default function Footer() {
                 <li>
                   <a
                     href="tel:+2348037869334"
-                    className="font-pp-neue-montreal cursor-pointer text-base text-white/80 transition-opacity hover:opacity-80 md:text-lg"
+                    className="font-pp-neue-montreal cursor-pointer text-base text-primary/80 transition-opacity hover:opacity-80 md:text-lg"
                   >
                     +234 803 786 9334
                   </a>
@@ -95,12 +95,12 @@ export default function Footer() {
                 <li>
                   <a
                     href="tel:+2347033668523"
-                    className="font-pp-neue-montreal cursor-pointer text-base text-white/80 transition-opacity hover:opacity-80 md:text-lg"
+                    className="font-pp-neue-montreal cursor-pointer text-base text-primary/80 transition-opacity hover:opacity-80 md:text-lg"
                   >
                     +234 703 366 8523
                   </a>
                 </li>
-                <li className="text-white/80">
+                <li className="text-primary/80">
                   <p className="font-pp-neue-montreal text-base md:text-lg">
                     22 Durban Street, Wuse 2,
                     <br />
@@ -113,8 +113,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-8 border-t border-white/10 pt-6">
-          <p className="text-sm text-white/60">
+        <div className="mt-8 border-t border-primary/10 pt-6">
+          <p className="text-sm text-primary/60">
             © {new Date().getFullYear()} COAN West Africa Limited. All rights
             reserved.
           </p>

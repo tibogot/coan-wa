@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
@@ -55,12 +55,12 @@ export default function Projects() {
       <PageHero image={media.sticky3} alt="Projects Background">
         <div className="p-4 md:p-8 md:pb-12">
           <AnimatedText isHero={true}>
-            <h1 className="font-pp-neue-montreal mb-4 max-w-4xl text-left text-4xl text-white md:text-6xl">
+            <h1 className="font-pp-neue-montreal mb-4 max-w-4xl text-left text-4xl text-primary md:text-6xl">
               Transforming Infrastructure Through Innovation
             </h1>
           </AnimatedText>
           <AnimatedText isHero={true}>
-            <p className="font-pp-neue-montreal max-w-xl text-left text-base text-white/90 md:text-lg">
+            <p className="font-pp-neue-montreal max-w-xl text-left text-base text-primary/90 md:text-lg">
               Explore our portfolio of successful construction and engineering
               projects across West Africa.
             </p>
@@ -74,13 +74,13 @@ export default function Projects() {
             <div className="mb-8 flex items-center gap-3">
               <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
               <AnimatedText>
-                <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+                <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                   PROJECTS
                 </p>
               </AnimatedText>
             </div>
             <AnimatedText>
-              <h2 className="font-pp-neue-montreal text-secondary text-left text-4xl md:text-6xl">
+              <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-6xl">
                 Our portfolio showcases excellence,
                 <br />
                 featuring transformative projects
@@ -106,12 +106,12 @@ export default function Projects() {
                 </div>
                 <div className="mt-4">
                   <AnimatedText>
-                    <p className="font-pp-neue-montreal-mono text-secondary mb-2 text-left text-sm uppercase md:text-sm">
+                    <p className="font-pp-neue-montreal-mono text-foreground mb-2 text-left text-sm uppercase md:text-sm">
                       {project.status}
                     </p>
                   </AnimatedText>
                   <AnimatedText>
-                    <h3 className="font-pp-neue-montreal text-secondary text-left text-lg md:text-xl">
+                    <h3 className="font-pp-neue-montreal text-foreground text-left text-lg md:text-xl">
                       {project.title}
                     </h3>
                   </AnimatedText>

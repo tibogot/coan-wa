@@ -79,50 +79,47 @@ function AnimatedText({
 
   useGSAP(
     () => {
-      if (!wrapperRef.current || !fontsReady) return;
+      const wrapper = wrapperRef.current;
+      if (!wrapper || !fontsReady) return;
 
-      const createSplitTextInstances = () => {
-        splitRefs.current.forEach((split) => split.revert());
-        splitRefs.current = [];
+      const childEls = Array.from(wrapper.children) as HTMLElement[];
+      if (childEls.length === 0) return;
 
-        const childEls = Array.from(
-          wrapperRef.current!.children,
-        ) as HTMLElement[];
-        if (childEls.length === 0) return;
+      const splits: SplitText[] = [];
 
-        childEls.forEach((child, index) => {
-          try {
-            // Force layout so SplitText measures after fonts settle
-            void child.offsetHeight;
+      childEls.forEach((child, index) => {
+        try {
+          // Create everything synchronously inside the GSAP context (no timers),
+          // so tweens and ScrollTriggers are cleaned up on unmount/route change.
+          // autoSplit re-runs onSplit when the width changes, which rebuilds the
+          // animation against the new line breaks instead of leaving stale lines.
+          const split = SplitText.create(child, {
+            type: "lines",
+            mask: "lines",
+            autoSplit: true,
+            aria: "none",
+            onSplit(self) {
+              if (!self.lines.length) return undefined;
 
-            const split = SplitText.create(child, {
-              type: "lines",
-              mask: "lines",
-              autoSplit: true,
-              aria: "none",
-            });
+              fixMask({ elements: [child], masks: self.lines });
 
-            if (!split?.lines?.length) return;
-
-            splitRefs.current.push(split);
-            fixMask({ elements: [child], masks: split.lines });
-
-            gsap.set(split.lines, {
-              yPercent: 100,
-              autoAlpha: 0,
-            });
-
-            if (isHero) {
-              gsap.to(split.lines, {
-                yPercent: 0,
-                autoAlpha: 1,
-                stagger,
-                duration,
-                ease,
-                delay: delay + index * 0.1,
+              gsap.set(self.lines, {
+                yPercent: 100,
+                autoAlpha: 0,
               });
-            } else {
-              gsap.to(split.lines, {
+
+              if (isHero) {
+                return gsap.to(self.lines, {
+                  yPercent: 0,
+                  autoAlpha: 1,
+                  stagger,
+                  duration,
+                  ease,
+                  delay: delay + index * 0.1,
+                });
+              }
+
+              return gsap.to(self.lines, {
                 yPercent: 0,
                 autoAlpha: 1,
                 stagger,
@@ -130,29 +127,29 @@ function AnimatedText({
                 ease,
                 delay,
                 scrollTrigger: {
-                  trigger: trigger || wrapperRef.current || child,
+                  trigger: trigger || wrapper,
                   start,
                   toggleActions,
                 },
               });
-            }
-          } catch {
-            gsap.set(child, { autoAlpha: 1 });
-          }
-        });
-      };
+            },
+          });
 
-      const raf = requestAnimationFrame(() => {
-        setTimeout(createSplitTextInstances, 100);
+          splits.push(split);
+        } catch {
+          gsap.set(child, { autoAlpha: 1 });
+        }
       });
 
+      splitRefs.current = splits;
+
       return () => {
-        cancelAnimationFrame(raf);
-        splitRefs.current.forEach((split) => split.revert());
+        splits.forEach((split) => split.revert());
         splitRefs.current = [];
       };
     },
     {
+      scope: wrapperRef,
       dependencies: [
         trigger,
         start,
@@ -164,6 +161,7 @@ function AnimatedText({
         fontsReady,
         isHero,
       ],
+      revertOnUpdate: true,
     },
   );
 

@@ -107,6 +107,8 @@ interface ExtendedTimeline extends gsap.core.Timeline {
   previous?: (vars?: gsap.TweenVars) => gsap.core.Tween | number;
   times?: number[];
   draggable?: Draggable;
+  /** Removes listeners, kills the Draggable and the timeline. */
+  destroy?: () => void;
 }
 
 /**
@@ -292,6 +294,11 @@ function horizontalLoop(
   populateTimeline();
   populateOffsets();
   window.addEventListener("resize", onResize);
+  tl.destroy = () => {
+    window.removeEventListener("resize", onResize);
+    tl.draggable?.kill();
+    tl.kill();
+  };
 
   function toIndex(
     index: number,
@@ -433,7 +440,11 @@ const ProfilesTicker = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const items = gsap.utils.toArray(".profile-card") as HTMLElement[];
+    // Scoped to this ticker so other `.profile-card` elements are never grabbed
+    const items = gsap.utils.toArray(
+      ".profile-card",
+      containerRef.current,
+    ) as HTMLElement[];
 
     // Create the horizontal loop with draggable enabled
     const loop = horizontalLoop(items, {
@@ -446,7 +457,11 @@ const ProfilesTicker = () => {
 
     // Cleanup
     return () => {
-      loop.kill();
+      if (loop.destroy) loop.destroy();
+      else loop.kill();
+      // Drop leftover transforms so a re-init (React strict mode / HMR)
+      // measures the cards from a clean state instead of a shifted one.
+      gsap.set(items, { clearProps: "transform" });
     };
   }, []);
 
@@ -475,15 +490,15 @@ const ProfilesTicker = () => {
               <div className="absolute right-0 bottom-0 left-0 h-16 overflow-hidden transition-all duration-500 ease-out group-hover:h-32 md:h-20 md:group-hover:h-40">
                 <div className="bg-secondary absolute right-0 bottom-0 left-0 flex h-32 translate-y-16 flex-col justify-between px-4 py-3 transition-transform duration-500 ease-out group-hover:translate-y-0 md:h-40 md:translate-y-20 md:px-6 md:py-4">
                   <div className="flex flex-col">
-                    <h3 className="font-pp-neue-montreal text-left text-lg text-white md:text-2xl">
+                    <h3 className="font-pp-neue-montreal text-left text-lg text-primary md:text-2xl">
                       {profile.name}
                     </h3>
-                    <p className="font-pp-neue-montreal-mono text-left text-sm text-white/80 uppercase md:text-sm">
+                    <p className="font-pp-neue-montreal-mono text-left text-sm text-primary/80 uppercase md:text-sm">
                       {profile.title}
                     </p>
                   </div>
                   <div>
-                    <p className="font-pp-neue-montreal text-left text-xs text-white/70 md:text-sm">
+                    <p className="font-pp-neue-montreal text-left text-xs text-primary/70 md:text-sm">
                       {profile.description}
                     </p>
                   </div>

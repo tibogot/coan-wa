@@ -13,13 +13,13 @@ export default function VisionSection() {
               <div className="mb-8 flex items-center gap-3">
                 <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
                 <AnimatedText>
-                  <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+                  <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                     VISION
                   </p>
                 </AnimatedText>
               </div>
               <AnimatedText>
-                <h2 className="font-pp-neue-montreal text-secondary text-left text-4xl md:text-5xl">
+                <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-5xl">
                   Building the future of infrastructure across West Africa with
                   precision and innovation.
                 </h2>
@@ -29,20 +29,20 @@ export default function VisionSection() {
           {/* Right section - Content */}
           <div className="flex w-full flex-col md:mt-60 md:w-1/2">
             {/* Top border */}
-            <div className="border-secondary mb-4 border-t"></div>
+            <div className="border-foreground mb-4 border-t"></div>
 
             {/* First content block */}
             <div className="flex flex-col gap-4 pb-4 md:flex-row">
               <div className="w-full md:w-1/2">
                 <AnimatedText>
-                  <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                  <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                     Our Mission
                   </h3>
                 </AnimatedText>
               </div>
               <div className="w-full md:w-1/2">
                 <AnimatedText>
-                  <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                  <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                     We are committed to delivering world-class construction and
                     engineering solutions that transform communities and drive
                     economic growth across West Africa. Through innovative
@@ -54,20 +54,20 @@ export default function VisionSection() {
             </div>
 
             {/* Border between blocks */}
-            <div className="border-secondary mb-4 border-t"></div>
+            <div className="border-foreground mb-4 border-t"></div>
 
             {/* Second content block */}
             <div className="flex flex-col gap-4 pb-4 md:flex-row">
               <div className="w-full md:w-1/2">
                 <AnimatedText>
-                  <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                  <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                     Our Values
                   </h3>
                 </AnimatedText>
               </div>
               <div className="w-full md:w-1/2">
                 <AnimatedText>
-                  <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                  <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                     Integrity, excellence, and innovation guide everything we
                     do. We prioritize safety, sustainability, and client
                     satisfaction in every project, ensuring lasting impact and
@@ -78,20 +78,20 @@ export default function VisionSection() {
             </div>
 
             {/* Border between blocks */}
-            <div className="border-secondary mb-4 border-t"></div>
+            <div className="border-foreground mb-4 border-t"></div>
 
             {/* Third content block */}
             <div className="flex flex-col gap-4 md:flex-row">
               <div className="w-full md:w-1/2">
                 <AnimatedText>
-                  <h3 className="font-pp-neue-montreal text-secondary text-left text-xl md:text-2xl">
+                  <h3 className="font-pp-neue-montreal text-foreground text-left text-xl md:text-2xl">
                     Our Vision
                   </h3>
                 </AnimatedText>
               </div>
               <div className="w-full md:w-1/2">
                 <AnimatedText>
-                  <p className="font-pp-neue-montreal text-secondary text-left text-sm md:text-base">
+                  <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                     To be the leading construction and engineering firm in West
                     Africa, recognized for transforming infrastructure through
                     cutting-edge technology, sustainable practices, and

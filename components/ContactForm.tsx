@@ -47,7 +47,7 @@ export default function ContactForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="name"
-          className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm"
+          className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm"
         >
           NAME
         </label>
@@ -57,14 +57,14 @@ export default function ContactForm() {
           type="text"
           required
           autoComplete="name"
-          className="border-secondary font-pp-neue-montreal text-secondary focus:border-secondary w-full border-b bg-transparent py-3 text-base outline-none"
+          className="border-foreground font-pp-neue-montreal text-foreground focus:border-foreground w-full border-b bg-transparent py-3 text-base outline-none"
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label
           htmlFor="email"
-          className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm"
+          className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm"
         >
           EMAIL
         </label>
@@ -74,14 +74,14 @@ export default function ContactForm() {
           type="email"
           required
           autoComplete="email"
-          className="border-secondary font-pp-neue-montreal text-secondary focus:border-secondary w-full border-b bg-transparent py-3 text-base outline-none"
+          className="border-foreground font-pp-neue-montreal text-foreground focus:border-foreground w-full border-b bg-transparent py-3 text-base outline-none"
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label
           htmlFor="phone"
-          className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm"
+          className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm"
         >
           PHONE
         </label>
@@ -90,14 +90,14 @@ export default function ContactForm() {
           name="phone"
           type="tel"
           autoComplete="tel"
-          className="border-secondary font-pp-neue-montreal text-secondary focus:border-secondary w-full border-b bg-transparent py-3 text-base outline-none"
+          className="border-foreground font-pp-neue-montreal text-foreground focus:border-foreground w-full border-b bg-transparent py-3 text-base outline-none"
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label
           htmlFor="message"
-          className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm"
+          className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm"
         >
           MESSAGE
         </label>
@@ -106,7 +106,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="border-secondary font-pp-neue-montreal text-secondary focus:border-secondary w-full resize-y border-b bg-transparent py-3 text-base outline-none"
+          className="border-foreground font-pp-neue-montreal text-foreground focus:border-foreground w-full resize-y border-b bg-transparent py-3 text-base outline-none"
         />
       </div>
 
@@ -114,14 +114,14 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="bg-secondary hover:bg-secondary/90 disabled:bg-secondary/60 cursor-pointer rounded-px px-5 py-2.5 text-sm text-white transition-all duration-200 md:text-base"
+          className="font-pp-neue-montreal-mono bg-secondary text-foreground hover:bg-secondary/90 cursor-pointer rounded-px px-5 py-2.5 text-xs tracking-wide uppercase transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60 md:px-6 md:py-3"
         >
           {status === "loading" ? "Sending..." : "Send message"}
         </button>
       </div>
 
       {status === "success" && (
-        <p className="font-pp-neue-montreal text-secondary text-sm md:text-base">
+        <p className="font-pp-neue-montreal text-foreground text-sm md:text-base">
           Thanks — your message has been sent. We&apos;ll get back to you soon.
         </p>
       )}

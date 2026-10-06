@@ -1,11 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, SplitText, ScrollTrigger } from "@/lib/gsap";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import CtaLink from "@/components/CtaLink";
 import { media } from "@/lib/media";
 
 const servicesData = [
@@ -45,6 +44,44 @@ export default function ServicesHero() {
   const descRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const imageInnerRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // The titles/descriptions are split into lines once per build. Lines are only
+  // correct for the font and width they were measured at, so bump this key to
+  // rebuild the whole timeline when web fonts finish loading or the width
+  // changes (e.g. orientation change). Height-only resizes (mobile URL bar) are
+  // ignored on purpose.
+  const [layoutKey, setLayoutKey] = useState(0);
+
+  useEffect(() => {
+    let cancelled = false;
+    let width = window.innerWidth;
+    let timer: number | undefined;
+
+    const rebuild = () => setLayoutKey((key) => key + 1);
+
+    const onResize = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        if (window.innerWidth === width) return;
+        width = window.innerWidth;
+        rebuild();
+      }, 250);
+    };
+
+    window.addEventListener("resize", onResize);
+
+    if (document.fonts && document.fonts.status !== "loaded") {
+      document.fonts.ready.then(() => {
+        if (!cancelled) rebuild();
+      });
+    }
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
 
   useGSAP(
     () => {
@@ -135,6 +172,11 @@ export default function ServicesHero() {
           pin: true,
           pinSpacing: true, // Seamless pinning like StickyCards3D
           invalidateOnRefresh: true,
+          // Pins add scroll height (pin spacer). Every trigger further down the
+          // page must be measured AFTER that spacer exists, otherwise it starts
+          // thousands of pixels too early. Higher priority = refreshed first,
+          // regardless of the order triggers were (re)created in.
+          refreshPriority: 1,
         },
       });
 
@@ -410,7 +452,7 @@ export default function ServicesHero() {
         descSplits.forEach((split) => split?.revert());
       };
     },
-    { scope: sectionRef, dependencies: [] },
+    { scope: sectionRef, dependencies: [layoutKey], revertOnUpdate: true },
   );
 
   return (
@@ -421,7 +463,7 @@ export default function ServicesHero() {
       {/* Left side - Content */}
       <div className="relative z-10 flex w-full flex-col items-start justify-center px-4 md:w-1/2 md:px-8">
         {/* <AnimatedText start="top 80%" stagger={0.15} duration={0.8}>
-          <p className="font-pp-neue-montreal-mono text-secondary mb-6 text-xs md:text-sm">
+          <p className="font-pp-neue-montreal-mono text-foreground mb-6 text-xs md:text-sm">
             SERVICES
           </p>
         </AnimatedText> */}
@@ -436,7 +478,7 @@ export default function ServicesHero() {
               }}
               className="absolute inset-0"
             >
-              <h1 className="font-pp-neue-montreal text-secondary w-full text-left text-2xl md:text-4xl lg:text-5xl">
+              <h1 className="font-pp-neue-montreal text-foreground w-full text-left text-2xl md:text-4xl lg:text-5xl">
                 {service.title}
               </h1>
             </div>
@@ -453,23 +495,20 @@ export default function ServicesHero() {
               }}
               className="absolute inset-0"
             >
-              <p className="font-pp-neue-montreal text-secondary/80 w-full text-left text-base md:text-lg">
+              <p className="font-pp-neue-montreal text-foreground/80 w-full text-left text-base md:text-lg">
                 {service.description}
               </p>
             </div>
           ))}
         </div>
 
-        <Link
+        <CtaLink
           href="/services"
-          className="font-pp-neue-montreal bg-secondary text-primary hover:bg-secondary/90 group relative z-20 flex items-center gap-3 px-6 py-4 text-sm transition-all duration-300 md:text-base"
+          variant="split"
+          className="relative z-20"
         >
           Explore Our Services
-          <ArrowRight
-            size={20}
-            className="transition-transform duration-300 group-hover:translate-x-1"
-          />
-        </Link>
+        </CtaLink>
       </div>
 
       {/* Right side - Images stacked on top of each other */}
@@ -504,7 +543,7 @@ export default function ServicesHero() {
       </div>
 
       {/* Overlay gradient for mobile to ensure text readability */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-r from-white/95 via-white/80 to-transparent md:hidden" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-r from-primary/95 via-primary/80 to-transparent md:hidden" />
     </section>
   );
 }

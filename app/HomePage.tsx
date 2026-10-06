@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
-import { ArrowDownRight, ArrowRight } from "lucide-react";
+import { ArrowDownRight } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { media } from "@/lib/media";
 import MediaImage from "@/components/MediaImage";
 import AnimatedText from "@/components/AnimatedText3";
+import CtaLink from "@/components/CtaLink";
 import ServicesHero from "@/components/ServicesHero";
 import VisionSection from "@/components/VisionSection";
 import GradientTextSection from "@/components/GradientTextSection";
@@ -56,14 +56,17 @@ export default function HomePage() {
     <>
       <section className="bg-tertiary relative min-h-svh w-full overflow-hidden">
         <MediaImage
-          src={media.vitalis}
+          src={media.hero}
           alt="COAN West Africa construction site"
           fill
           priority
-          sizes="100vw"
+          fetchPriority="high"
+          // Image is ~2.06:1 and covers a full-height hero, so on tall/narrow
+          // screens the rendered width is driven by viewport height, not width.
+          sizes="max(100vw, 206vh)"
           quality={75}
         />
-        <div className="pointer-events-none absolute inset-0 z-10 flex items-end justify-between p-6 md:p-10">
+        <div className="pointer-events-none absolute inset-0 z-10 flex items-end justify-between px-4 py-3 md:px-8 md:py-6">
           <div className="flex flex-col items-start">
             <Image
               src="/images/newlogohero.svg"
@@ -74,13 +77,13 @@ export default function HomePage() {
               className="h-auto w-min(60vw,520px)"
             />
             <AnimatedText isHero={true} delay={0.8} duration={0.8}>
-              <p className="font-pp-neue-montreal mt-2 text-sm text-white md:text-base">
+              <p className="font-pp-neue-montreal text-primary mt-2 text-sm md:text-base">
                 Construction West Africa Unlimited
               </p>
             </AnimatedText>
           </div>
           <div className="bg-secondary flex h-8 w-8 items-center justify-center md:h-10 md:w-10">
-            <ArrowDownRight className="h-4 w-4 text-white md:h-5 md:w-5" />
+            <ArrowDownRight className="text-foreground h-4 w-4 md:h-5 md:w-5" />
           </div>
         </div>
       </section>
@@ -90,7 +93,7 @@ export default function HomePage() {
           <div className="mb-8 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
             <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                 WHO WE ARE
               </p>
             </AnimatedText>
@@ -98,7 +101,7 @@ export default function HomePage() {
           <div className="flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-8">
             <div className="w-full text-left md:w-1/2">
               <AnimatedText>
-                <h2 className="font-pp-neue-montreal text-secondary text-left text-4xl md:text-6xl">
+                <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-6xl">
                   Building the future of infrastructure across West Africa with
                   precision and innovation.
                 </h2>
@@ -106,7 +109,7 @@ export default function HomePage() {
             </div>
             <div className="flex w-full flex-col gap-6 md:w-1/2">
               <AnimatedText>
-                <p className="font-pp-neue-montreal text-secondary mb-4 text-left text-base md:text-xl">
+                <p className="font-pp-neue-montreal text-foreground mb-4 text-left text-base md:text-xl">
                   Three decades of expertise in construction and engineering
                   across West Africa. We deliver integrated solutions from
                   planning to execution, transforming infrastructure and shaping
@@ -120,12 +123,9 @@ export default function HomePage() {
                   governments, and private sector clients.
                 </p>
               </AnimatedText>
-              <Link
-                href="/company"
-                className="bg-secondary hover:bg-secondary/90 inline-flex w-fit cursor-pointer items-center gap-2 rounded-px px-4 py-2 text-sm text-white transition-all duration-200 md:px-5 md:py-2.5 md:text-base"
-              >
-                Learn more <ArrowRight size={16} />
-              </Link>
+              <CtaLink href="/company" variant="split">
+                Learn more
+              </CtaLink>
             </div>
           </div>
         </div>
@@ -137,12 +137,12 @@ export default function HomePage() {
             <div
               data-count="89"
               data-suffix="%"
-              className="font-pp-neue-montreal-mono text-secondary text-6xl tabular-nums md:text-8xl"
+              className="font-pp-neue-montreal-mono text-foreground text-6xl tabular-nums md:text-8xl"
               style={{ letterSpacing: "-0.05em" }}
             >
               89%
             </div>
-            <div className="font-pp-neue-montreal text-secondary mt-2 text-sm md:text-base">
+            <div className="font-pp-neue-montreal text-foreground mt-2 text-sm md:text-base">
               client satisfaction
             </div>
           </div>
@@ -150,12 +150,12 @@ export default function HomePage() {
             <div
               data-count="34"
               data-suffix="+"
-              className="font-pp-neue-montreal-mono text-secondary text-6xl tabular-nums md:text-8xl"
+              className="font-pp-neue-montreal-mono text-foreground text-6xl tabular-nums md:text-8xl"
               style={{ letterSpacing: "-0.05em" }}
             >
               34+
             </div>
-            <div className="font-pp-neue-montreal text-secondary mt-2 text-sm md:text-base">
+            <div className="font-pp-neue-montreal text-foreground mt-2 text-sm md:text-base">
               delivering excellence
             </div>
           </div>
@@ -163,12 +163,12 @@ export default function HomePage() {
             <div
               data-count="48"
               data-suffix="+"
-              className="font-pp-neue-montreal-mono text-secondary text-6xl tabular-nums md:text-8xl"
+              className="font-pp-neue-montreal-mono text-foreground text-6xl tabular-nums md:text-8xl"
               style={{ letterSpacing: "-0.05em" }}
             >
               48+
             </div>
-            <div className="font-pp-neue-montreal text-secondary mt-2 text-sm md:text-base">
+            <div className="font-pp-neue-montreal text-foreground mt-2 text-sm md:text-base">
               completed successfully
             </div>
           </div>
@@ -180,11 +180,11 @@ export default function HomePage() {
       <VisionSection />
 
       <GradientTextSection
-        textColor="rgba(255, 51, 0, 0.3)"
-        highlightColor="#ff3300"
+        textColor="rgba(23, 23, 23, 0.3)"
+        highlightColor="#171717"
         pin={false}
-        animationStart="center bottom"
-        animationEnd="center 30%"
+        animationStart="top 80%"
+        animationEnd="bottom 50%"
         className="py-32 md:py-80"
         contentClassName="mx-auto w-full max-w-4xl px-4 md:px-8"
       >
@@ -202,21 +202,21 @@ export default function HomePage() {
             <div className="mb-8 flex items-center gap-3">
               <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
               <AnimatedText>
-                <p className="font-pp-neue-montreal-mono text-secondary text-xs md:text-sm">
+                <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
                   TEAM
                 </p>
               </AnimatedText>
             </div>
             <div className="text-left">
               <AnimatedText>
-                <p className="font-pp-neue-montreal text-secondary mb-8 max-w-2xl text-left text-4xl md:text-6xl">
+                <p className="font-pp-neue-montreal text-foreground mb-8 max-w-2xl text-left text-4xl md:text-6xl">
                   Our People
                 </p>
               </AnimatedText>
             </div>
             <div className="text-left">
               <AnimatedText>
-                <p className="font-pp-neue-montreal text-secondary/80 max-w-2xl text-left text-base sm:text-lg md:text-xl">
+                <p className="font-pp-neue-montreal text-foreground/80 max-w-2xl text-left text-base sm:text-lg md:text-xl">
                   Meet the dedicated professionals driving excellence across all
                   our construction and engineering projects.
                 </p>
@@ -240,7 +240,7 @@ export default function HomePage() {
           quality={75}
         />
         <div className="relative z-10 p-4 md:p-8 md:pb-12">
-          <p className="font-pp-neue-montreal max-w-5xl text-left text-2xl text-white md:text-6xl">
+          <p className="font-pp-neue-montreal max-w-5xl text-left text-2xl text-primary md:text-6xl">
             Transforming landscapes and shaping futures through innovative
             construction solutions.
           </p>
