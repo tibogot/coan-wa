@@ -4,6 +4,7 @@ import { useId, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import AnimatedText from "./AnimatedText3";
+import GlitchText from "./GlitchText";
 
 interface FAQItem {
   question: string;
@@ -115,11 +116,9 @@ export default function FAQ() {
           <div className="md:col-span-4">
             <div className="flex items-center gap-3">
               <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-              <AnimatedText>
-                <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                  FAQ
-                </p>
-              </AnimatedText>
+              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+                <GlitchText appear>FAQ</GlitchText>
+              </p>
             </div>
           </div>
 

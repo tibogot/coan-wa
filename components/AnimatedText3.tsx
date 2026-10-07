@@ -80,7 +80,18 @@ function AnimatedText({
   useGSAP(
     () => {
       const wrapper = wrapperRef.current;
-      if (!wrapper || !fontsReady) return;
+      if (!wrapper) return;
+
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (reducedMotion) {
+        gsap.set(wrapper, { opacity: 1 });
+        return;
+      }
+
+      if (!fontsReady) return;
 
       const childEls = Array.from(wrapper.children) as HTMLElement[];
       if (childEls.length === 0) return;
@@ -141,11 +152,14 @@ function AnimatedText({
         }
       });
 
+      gsap.set(wrapper, { opacity: 1 });
+
       splitRefs.current = splits;
 
       return () => {
         splits.forEach((split) => split.revert());
         splitRefs.current = [];
+        gsap.set(wrapper, { opacity: 0 });
       };
     },
     {
@@ -168,7 +182,7 @@ function AnimatedText({
   return (
     <div
       ref={wrapperRef}
-      className={`animated-text-wrapper overflow-hidden ${className}`}
+      className={`animated-text-wrapper overflow-hidden ${isHero ? "min-h-[1.75rem] md:min-h-[2rem]" : ""} ${className}`}
     >
       {children}
     </div>

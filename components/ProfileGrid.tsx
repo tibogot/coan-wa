@@ -89,7 +89,7 @@ const ProfilesGrid = () => {
         {PROFILES.map((profile) => (
           <div
             key={profile.id}
-            className="profile-card group relative flex h-400px w-full cursor-pointer flex-col md:h-600px"
+            className="profile-card group relative flex h-[400px] w-full cursor-pointer flex-col md:h-[600px]"
           >
             {/* Profile Image */}
             <div className="group relative h-full w-full overflow-hidden">

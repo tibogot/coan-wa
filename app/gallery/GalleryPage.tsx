@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import AnimatedText from "@/components/AnimatedText3";
+import GlitchText from "@/components/GlitchText";
 import MasonryGallery from "@/components/MasonryGallery";
 import PageHero from "@/components/PageHero";
 import { media } from "@/lib/media";
@@ -38,16 +39,14 @@ export default function Gallery() {
         </div>
       </PageHero>
 
-      <section className="bg-primary relative min-h-screen w-full overflow-hidden px-4 py-20 md:px-8 md:py-30">
+      <section className="bg-primary relative min-h-screen w-full overflow-hidden px-4 py-20 md:px-8 md:py-32">
         <div className="relative z-10 w-full">
           <div className="mb-16 text-left">
             <div className="mb-8 flex items-center gap-3">
               <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-              <AnimatedText>
-                <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                  GALLERY
-                </p>
-              </AnimatedText>
+              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+                <GlitchText appear>GALLERY</GlitchText>
+              </p>
             </div>
             <AnimatedText>
               <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-6xl">

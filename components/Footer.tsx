@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-tertiary w-full px-4 pt-10 pb-6 text-primary md:px-8">
+    <footer className="bg-charcoal w-full px-4 pt-10 pb-6 text-primary md:px-8">
       <div className="flex flex-col justify-between gap-8">
         {/* Top Section */}
         <div className="flex flex-col gap-8 md:flex-row md:justify-between md:gap-4">

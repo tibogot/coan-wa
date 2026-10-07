@@ -1,6 +1,7 @@
 "use client";
 
 import AnimatedText from "./AnimatedText3";
+import GlitchText from "./GlitchText";
 
 export default function VisionSection() {
   return (
@@ -12,11 +13,9 @@ export default function VisionSection() {
             <div className="w-full text-left">
               <div className="mb-8 flex items-center gap-3">
                 <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-                <AnimatedText>
-                  <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                    VISION
-                  </p>
-                </AnimatedText>
+                <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+                  <GlitchText appear>VISION</GlitchText>
+                </p>
               </div>
               <AnimatedText>
                 <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-5xl">
@@ -43,11 +42,9 @@ export default function VisionSection() {
               <div className="w-full md:w-1/2">
                 <AnimatedText>
                   <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
-                    We are committed to delivering world-class construction and
-                    engineering solutions that transform communities and drive
-                    economic growth across West Africa. Through innovative
-                    approaches and sustainable practices, we build
-                    infrastructure that stands the test of time.
+                    We deliver world-class construction and engineering
+                    solutions that transform communities and drive economic
+                    growth across West Africa.
                   </p>
                 </AnimatedText>
               </div>
@@ -69,9 +66,8 @@ export default function VisionSection() {
                 <AnimatedText>
                   <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
                     Integrity, excellence, and innovation guide everything we
-                    do. We prioritize safety, sustainability, and client
-                    satisfaction in every project, ensuring lasting impact and
-                    meaningful contributions to the communities we serve.
+                    do, with safety, sustainability, and client satisfaction in
+                    every project.
                   </p>
                 </AnimatedText>
               </div>
@@ -92,11 +88,9 @@ export default function VisionSection() {
               <div className="w-full md:w-1/2">
                 <AnimatedText>
                   <p className="font-pp-neue-montreal text-foreground text-left text-sm md:text-base">
-                    To be the leading construction and engineering firm in West
-                    Africa, recognized for transforming infrastructure through
-                    cutting-edge technology, sustainable practices, and
-                    unwavering commitment to quality that shapes the future of
-                    the region.
+                    To be West Africa&apos;s leading construction and
+                    engineering firm, recognized for transforming
+                    infrastructure with technology and uncompromising quality.
                   </p>
                 </AnimatedText>
               </div>

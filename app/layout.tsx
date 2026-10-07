@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { GeistMono } from "geist/font/mono";
 import SmoothScroll from "@/components/SmoothScroll";
 import RouteEffects from "@/components/RouteEffects";
 import PrefetchMedia from "@/components/PrefetchMedia";
@@ -17,12 +18,6 @@ const ppNeueMontreal = localFont({
   display: "swap",
   variable: "--font-pp-neue-montreal",
   adjustFontFallback: "Arial",
-});
-
-const ppNeueMontrealMono = localFont({
-  src: "./fonts/PPNeueMontrealMono-Book.otf",
-  display: "swap",
-  variable: "--font-pp-neue-montreal-mono",
 });
 
 export const metadata: Metadata = {
@@ -55,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${ppNeueMontreal.variable} ${ppNeueMontrealMono.variable} h-full antialiased`}
+      className={`${ppNeueMontreal.variable} ${GeistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background">
         <SmoothScroll>

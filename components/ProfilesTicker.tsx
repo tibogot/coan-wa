@@ -474,7 +474,7 @@ const ProfilesTicker = () => {
         {PROFILES.map((profile) => (
           <div
             key={profile.id}
-            className="profile-card group relative m-4 flex h-400px w-280px shrink-0 cursor-pointer flex-col md:h-600px md:w-400px"
+            className="profile-card group relative m-4 flex h-[400px] w-[280px] shrink-0 cursor-pointer flex-col md:h-[600px] md:w-[400px]"
           >
             {/* Profile Image */}
             <div className="relative h-full w-full overflow-hidden">

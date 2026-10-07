@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { media } from "@/lib/media";
 import AnimatedText from "@/components/AnimatedText3";
+import GlitchText from "@/components/GlitchText";
 import GradientTextSection from "@/components/GradientTextSection";
 import PageHero from "@/components/PageHero";
 import MediaImage from "@/components/MediaImage";
@@ -136,11 +137,9 @@ export default function Services() {
         <div className="relative z-10 mx-auto flex h-full w-full flex-col">
           <div className="mb-8 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-            <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                OUR SERVICES
-              </p>
-            </AnimatedText>
+            <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+              <GlitchText appear>OUR SERVICES</GlitchText>
+            </p>
           </div>
           <div className="flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-8">
             <div className="w-full text-left md:w-1/2">
@@ -190,11 +189,9 @@ export default function Services() {
                   </p>
                 </AnimatedText>
                 <div className="mt-auto">
-                  <AnimatedText>
-                    <p className="font-pp-neue-montreal-mono text-foreground mb-3 text-xs md:text-sm">
-                      KEY CAPABILITIES
-                    </p>
-                  </AnimatedText>
+                  <p className="font-pp-neue-montreal-mono text-foreground mb-3 text-xs md:text-sm">
+                    <GlitchText appear>KEY CAPABILITIES</GlitchText>
+                  </p>
                   <ul className="space-y-2">
                     {service.capabilities.map((capability, idx) => (
                       <AnimatedText key={idx}>
@@ -281,11 +278,9 @@ export default function Services() {
               <div className="w-full text-left">
                 <div className="mb-8 flex items-center gap-3">
                   <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-                  <AnimatedText>
-                    <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                      EXPERTISE
-                    </p>
-                  </AnimatedText>
+                  <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+                    <GlitchText appear>EXPERTISE</GlitchText>
+                  </p>
                 </div>
                 <AnimatedText>
                   <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-5xl">

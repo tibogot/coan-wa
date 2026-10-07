@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from "react";
 import { useLenis } from "lenis/react";
 import { gsap } from "@/lib/gsap";
 import { routeHeroes } from "@/lib/media";
+import GlitchText from "@/components/GlitchText";
 
 const navLinks = [
   { href: "/company", label: "Company" },
@@ -159,8 +160,11 @@ export default function Navbar() {
     ? "text-foreground hover:text-secondary"
     : "text-primary/90 hover:text-secondary";
 
-  const contactTone =
-    "border-transparent bg-secondary text-foreground hover:bg-secondary/90";
+  // Same colors + hover as the dark page CTA (instant color swap, no fill wipe).
+  const contactLinkClass =
+    "font-pp-neue-montreal-mono hidden cursor-pointer rounded-px bg-charcoal px-3.5 py-1.5 text-xs tracking-wide text-primary uppercase transition-colors duration-200 hover:bg-secondary md:inline-block";
+  const contactMobileClass =
+    "font-pp-neue-montreal-mono cursor-pointer rounded-px bg-charcoal px-4 py-3 text-base text-primary uppercase no-underline transition-colors duration-200 hover:bg-secondary";
 
   return (
     <nav
@@ -196,15 +200,17 @@ export default function Navbar() {
 
         {/* Desktop Navigation - Perfectly Centered - HIDDEN ON MOBILE */}
         <div className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-8 md:flex">
-          {navLinks.map((link) => (
+          {navLinks.map((link, index) => (
             <Link
               key={link.href}
               href={link.href}
               onMouseEnter={() => warmHero(link.href)}
               onFocus={() => warmHero(link.href)}
-              className={`font-pp-neue-montreal-mono cursor-pointer py-1 text-sm tracking-wide uppercase transition-colors duration-500 ease-out ${linkTone}`}
+              className={`font-pp-neue-montreal-mono cursor-pointer py-1 text-xs tracking-wide uppercase transition-colors duration-500 ease-out ${linkTone}`}
             >
-              {link.label}
+              <GlitchText onLoad delay={0.12 + index * 0.08}>
+                {link.label}
+              </GlitchText>
             </Link>
           ))}
         </div>
@@ -216,9 +222,11 @@ export default function Navbar() {
             href="/contact"
             onMouseEnter={() => warmHero("/contact")}
             onFocus={() => warmHero("/contact")}
-            className={`font-pp-neue-montreal-mono hidden cursor-pointer rounded-px border px-3.5 py-1.5 text-sm tracking-wide uppercase transition-all duration-500 ease-out md:block ${contactTone}`}
+            className={contactLinkClass}
           >
-            Contact
+            <GlitchText onLoad delay={0.12 + navLinks.length * 0.08}>
+              Contact
+            </GlitchText>
           </Link>
           {/* Mobile Menu Button - Mobile Only */}
           <button
@@ -258,7 +266,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={() => setIsOpen(false)}
-            className={`font-pp-neue-montreal-mono cursor-pointer rounded-px border px-4 py-3 text-base uppercase no-underline transition-all duration-200 ${contactTone}`}
+            className={contactMobileClass}
           >
             Contact
           </Link>

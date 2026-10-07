@@ -70,7 +70,7 @@ export default function MasonryGallery({ images }: MasonryGalleryProps) {
               <div
                 key={`${colIndex}-${imgIndex}`}
                 className={`gallery-item group bg-tertiary relative overflow-hidden ${
-                  image.tall ? "h-500px md:h-650px" : "aspect-4/3"
+                  image.tall ? "h-[500px] md:h-[650px]" : "aspect-4/3"
                 }`}
               >
                 <Image

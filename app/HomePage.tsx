@@ -1,56 +1,58 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { ArrowDownRight } from "lucide-react";
-import { gsap, useGSAP } from "@/lib/gsap";
+// import { useRef } from "react";
+// import { gsap, useGSAP } from "@/lib/gsap";
 import { media } from "@/lib/media";
 import MediaImage from "@/components/MediaImage";
 import AnimatedText from "@/components/AnimatedText3";
 import CtaLink from "@/components/CtaLink";
-import ServicesHero from "@/components/ServicesHero";
+import GlitchText from "@/components/GlitchText";
+// import ServicesHero from "@/components/ServicesHero";
 import VisionSection from "@/components/VisionSection";
 import GradientTextSection from "@/components/GradientTextSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import ProfilesTicker from "@/components/ProfilesTicker";
+import ServicesOverview from "@/components/ServicesOverview";
+// import ProfilesTicker from "@/components/ProfilesTicker";
 import FAQ from "@/components/FAQ";
 import ProjectsPreview from "@/components/ProjectsPreview";
+import OvaScrollSlider from "@/components/OvaScrollSlider";
 
 export default function HomePage() {
-  const statsRowRef = useRef<HTMLDivElement | null>(null);
+  // const statsRowRef = useRef<HTMLDivElement | null>(null);
 
-  useGSAP(
-    () => {
-      if (!statsRowRef.current) return;
+  // useGSAP(
+  //   () => {
+  //     if (!statsRowRef.current) return;
 
-      const els = Array.from(
-        statsRowRef.current.querySelectorAll<HTMLElement>("[data-count]"),
-      );
+  //     const els = Array.from(
+  //       statsRowRef.current.querySelectorAll<HTMLElement>("[data-count]"),
+  //     );
 
-      els.forEach((el) => {
-        const endValue = Number(el.dataset.count ?? "0");
-        const suffix = el.dataset.suffix ?? "";
-        const state = { value: 0 };
+  //     els.forEach((el) => {
+  //       const endValue = Number(el.dataset.count ?? "0");
+  //       const suffix = el.dataset.suffix ?? "";
+  //       const state = { value: 0 };
 
-        el.textContent = `0${suffix}`;
+  //       el.textContent = `0${suffix}`;
 
-        gsap.to(state, {
-          value: endValue,
-          ease: "none",
-          scrollTrigger: {
-            trigger: statsRowRef.current!,
-            start: "top 85%",
-            end: "top 45%",
-            scrub: true,
-          },
-          onUpdate: () => {
-            el.textContent = `${Math.round(state.value)}${suffix}`;
-          },
-        });
-      });
-    },
-    { scope: statsRowRef },
-  );
+  //       gsap.to(state, {
+  //         value: endValue,
+  //         ease: "none",
+  //         scrollTrigger: {
+  //           trigger: statsRowRef.current!,
+  //           start: "top 85%",
+  //           end: "top 45%",
+  //           scrub: true,
+  //         },
+  //         onUpdate: () => {
+  //           el.textContent = `${Math.round(state.value)}${suffix}`;
+  //         },
+  //       });
+  //     });
+  //   },
+  //   { scope: statsRowRef },
+  // );
 
   return (
     <>
@@ -74,17 +76,24 @@ export default function HomePage() {
               width={850}
               height={260}
               priority
-              className="h-auto w-min(60vw,520px)"
+              loading="eager"
+              fetchPriority="high"
+              className="h-auto w-[min(60vw,520px)]"
             />
-            <AnimatedText isHero={true} delay={0.8} duration={0.8}>
-              <p className="font-pp-neue-montreal text-primary mt-2 text-sm md:text-base">
+            <AnimatedText
+              isHero
+              delay={0.8}
+              duration={0.8}
+              className="mt-2 w-full"
+            >
+              <p className="font-pp-neue-montreal text-primary text-sm md:text-base">
                 Construction West Africa Unlimited
               </p>
             </AnimatedText>
           </div>
-          <div className="bg-secondary flex h-8 w-8 items-center justify-center md:h-10 md:w-10">
+          {/* <div className="bg-secondary flex h-8 w-8 items-center justify-center md:h-10 md:w-10">
             <ArrowDownRight className="text-foreground h-4 w-4 md:h-5 md:w-5" />
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -92,11 +101,9 @@ export default function HomePage() {
         <div className="relative z-10 mx-auto flex h-full w-full flex-col">
           <div className="mb-8 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-            <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                WHO WE ARE
-              </p>
-            </AnimatedText>
+            <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+              <GlitchText appear>WHO WE ARE</GlitchText>
+            </p>
           </div>
           <div className="flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-8">
             <div className="w-full text-left md:w-1/2">
@@ -123,12 +130,13 @@ export default function HomePage() {
                   governments, and private sector clients.
                 </p>
               </AnimatedText>
-              <CtaLink href="/company" variant="split">
+              <CtaLink href="/company" variant="split" tone="dark">
                 Learn more
               </CtaLink>
             </div>
           </div>
         </div>
+        {/* Numbers / stats row
         <div
           ref={statsRowRef}
           className="mt-auto flex w-full flex-col gap-8 pt-20 pb-10 sm:flex-row sm:items-end sm:justify-between sm:gap-12 md:pt-28 md:pb-14"
@@ -173,19 +181,22 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+        */}
       </section>
 
+      {/* Pinned services section
       <ServicesHero />
+      */}
 
       <VisionSection />
 
       <GradientTextSection
         textColor="rgba(23, 23, 23, 0.3)"
-        highlightColor="#171717"
+        highlightColor="#ff5f02"
         pin={false}
         animationStart="top 80%"
         animationEnd="bottom 50%"
-        className="py-32 md:py-80"
+        className="py-16 md:py-36"
         contentClassName="mx-auto w-full max-w-4xl px-4 md:px-8"
       >
         <h4 className="font-pp-neue-montreal text-4xl leading-tight md:text-6xl">
@@ -196,16 +207,17 @@ export default function HomePage() {
 
       <WhyChooseUs />
 
+      <ServicesOverview />
+
+      {/* TEAM section (hidden for now)
       <section className="bg-primary relative w-full py-24">
         <div className="mb-16 px-4 md:mb-24 md:px-8">
           <div className="flex flex-col items-start">
             <div className="mb-8 flex items-center gap-3">
               <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-              <AnimatedText>
-                <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                  TEAM
-                </p>
-              </AnimatedText>
+              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+                <GlitchText appear>TEAM</GlitchText>
+              </p>
             </div>
             <div className="text-left">
               <AnimatedText>
@@ -226,10 +238,13 @@ export default function HomePage() {
         </div>
         <ProfilesTicker />
       </section>
+      */}
 
       <FAQ />
 
       <ProjectsPreview />
+
+      <OvaScrollSlider />
 
       <section className="bg-tertiary relative flex min-h-svh w-full items-end justify-start">
         <MediaImage

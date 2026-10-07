@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import AnimatedText from "./AnimatedText3";
+import GlitchText from "./GlitchText";
 import { media } from "@/lib/media";
 
 export default function WhyChooseUs() {
@@ -10,16 +11,14 @@ export default function WhyChooseUs() {
       <div className="relative z-10 mx-auto flex h-full w-full flex-col">
         <div className="mb-8 flex items-center gap-3">
           <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-          <AnimatedText>
-            <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-              WHY CHOOSE US
-            </p>
-          </AnimatedText>
+          <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+            <GlitchText appear>WHY CHOOSE US</GlitchText>
+          </p>
         </div>
         <div className="flex w-full flex-col gap-8 md:flex-row md:gap-12 md:items-center">
           {/* Left section - Image */}
           <div className="w-full md:w-1/2">
-            <div className="bg-tertiary relative h-400px w-full overflow-hidden md:h-500px">
+            <div className="bg-tertiary relative h-[400px] w-full overflow-hidden md:h-[500px]">
               <Image
                 src={media.joshua}
                 alt="Why Choose Us"

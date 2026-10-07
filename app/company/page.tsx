@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ProfileGrid from "@/components/ProfileGrid";
 import AnimatedText from "@/components/AnimatedText3";
+import GlitchText from "@/components/GlitchText";
 import PageHero from "@/components/PageHero";
 import MediaImage from "@/components/MediaImage";
 import { media } from "@/lib/media";
@@ -39,11 +40,9 @@ export default function Company() {
         <div className="relative z-10 mx-auto flex h-full w-full flex-col">
           <div className="mb-8 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-            <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                VISION
-              </p>
-            </AnimatedText>
+            <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+              <GlitchText appear>VISION</GlitchText>
+            </p>
           </div>
           <div className="text-left">
             <div className="w-full md:w-1/2">
@@ -134,7 +133,7 @@ export default function Company() {
         <div className="mb-8 flex items-center gap-3">
           <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
           <p className="font-pp-neue-montreal-mono text-foreground text-left text-xs md:text-sm">
-            LEADERSHIP
+            <GlitchText appear>LEADERSHIP</GlitchText>
           </p>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import AnimatedText from "@/components/AnimatedText3";
+import GlitchText from "@/components/GlitchText";
 import PageHero from "@/components/PageHero";
 import { media } from "@/lib/media";
 
@@ -68,16 +69,14 @@ export default function Projects() {
         </div>
       </PageHero>
 
-      <section className="bg-primary relative min-h-120vh w-full overflow-hidden px-4 py-30 md:px-8">
+      <section className="bg-primary relative min-h-[120vh] w-full overflow-hidden px-4 py-32 md:px-8">
         <div className="relative z-10 mx-auto flex h-full w-full flex-col">
           <div className="text-left">
             <div className="mb-8 flex items-center gap-3">
               <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-              <AnimatedText>
-                <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                  PROJECTS
-                </p>
-              </AnimatedText>
+              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+                <GlitchText appear>PROJECTS</GlitchText>
+              </p>
             </div>
             <AnimatedText>
               <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-6xl">
@@ -93,7 +92,7 @@ export default function Projects() {
           <div className="mt-24 grid grid-cols-1 gap-8 md:mt-32 md:grid-cols-3 md:gap-12">
             {projects.map((project) => (
               <div key={project.image.src} className="group relative flex flex-col">
-                <div className="bg-tertiary relative h-300px w-full overflow-hidden md:h-380px">
+                <div className="bg-tertiary relative h-[300px] w-full overflow-hidden md:h-[380px]">
                   <Image
                     src={project.image}
                     alt={project.title}

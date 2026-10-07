@@ -1,6 +1,7 @@
 "use client";
 
 import AnimatedText from "@/components/AnimatedText3";
+import GlitchText from "@/components/GlitchText";
 import ContactForm from "@/components/ContactForm";
 import PageHero from "@/components/PageHero";
 import { media } from "@/lib/media";
@@ -47,15 +48,13 @@ export default function ContactPage() {
         </div>
       </PageHero>
 
-      <section className="bg-primary relative w-full overflow-hidden px-4 py-20 md:px-8 md:py-30">
+      <section className="bg-primary relative w-full overflow-hidden px-4 py-20 md:px-8 md:py-32">
         <div className="relative z-10 mx-auto flex h-full w-full flex-col">
           <div className="mb-8 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-            <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                CONTACT
-              </p>
-            </AnimatedText>
+            <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+              <GlitchText appear>CONTACT</GlitchText>
+            </p>
           </div>
 
           <div className="flex w-full flex-col gap-16 lg:flex-row lg:gap-20">
@@ -95,7 +94,7 @@ export default function ContactPage() {
 
             <div className="w-full lg:w-1/2">
               <p className="font-pp-neue-montreal-mono text-foreground mb-6 text-xs md:text-sm">
-                SEND A MESSAGE
+                <GlitchText appear>SEND A MESSAGE</GlitchText>
               </p>
               <ContactForm />
             </div>

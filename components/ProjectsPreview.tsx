@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedText from "./AnimatedText3";
+import GlitchText from "./GlitchText";
 import { media } from "@/lib/media";
 
 const PROJECTS_PREVIEW = [
@@ -37,11 +38,9 @@ export default function ProjectsPreview() {
           {/* Section label */}
           <div className="mb-6 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-            <AnimatedText>
-              <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
-                PROJECTS
-              </p>
-            </AnimatedText>
+            <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+              <GlitchText appear>PROJECTS</GlitchText>
+            </p>
           </div>
 
           {/* Title */}
@@ -57,7 +56,7 @@ export default function ProjectsPreview() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
             {PROJECTS_PREVIEW.map((project) => (
               <div key={project.id} className="group relative flex flex-col">
-                <div className="bg-tertiary relative h-300px w-full overflow-hidden md:h-380px">
+                <div className="bg-tertiary relative h-[300px] w-full overflow-hidden md:h-[380px]">
                   <Image
                     src={project.image}
                     alt={project.title}
