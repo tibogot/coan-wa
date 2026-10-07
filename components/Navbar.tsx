@@ -162,7 +162,7 @@ export default function Navbar() {
 
   // Same colors + hover as the dark page CTA (instant color swap, no fill wipe).
   const contactLinkClass =
-    "font-pp-neue-montreal-mono hidden cursor-pointer rounded-px bg-charcoal px-3.5 py-1.5 text-xs tracking-wide text-primary uppercase transition-colors duration-200 hover:bg-secondary md:inline-block";
+    "font-pp-neue-montreal-mono hidden cursor-pointer rounded-px bg-charcoal px-3.5 py-1.5 text-sm tracking-wide text-primary uppercase transition-colors duration-200 hover:bg-secondary md:inline-block";
   const contactMobileClass =
     "font-pp-neue-montreal-mono cursor-pointer rounded-px bg-charcoal px-4 py-3 text-base text-primary uppercase no-underline transition-colors duration-200 hover:bg-secondary";
 
@@ -206,7 +206,7 @@ export default function Navbar() {
               href={link.href}
               onMouseEnter={() => warmHero(link.href)}
               onFocus={() => warmHero(link.href)}
-              className={`font-pp-neue-montreal-mono cursor-pointer py-1 text-xs tracking-wide uppercase transition-colors duration-500 ease-out ${linkTone}`}
+              className={`font-pp-neue-montreal-mono cursor-pointer py-1 text-sm tracking-wide uppercase transition-colors duration-500 ease-out ${linkTone}`}
             >
               <GlitchText onLoad delay={0.12 + index * 0.08}>
                 {link.label}

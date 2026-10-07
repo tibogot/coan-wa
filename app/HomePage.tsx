@@ -97,6 +97,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <OvaScrollSlider />
+
       <section className="bg-primary relative w-full overflow-hidden px-4 py-10 md:px-8 md:py-20">
         <div className="relative z-10 mx-auto flex h-full w-full flex-col">
           <div className="mb-8 flex items-center gap-3">
@@ -243,8 +245,6 @@ export default function HomePage() {
       <FAQ />
 
       <ProjectsPreview />
-
-      <OvaScrollSlider />
 
       <section className="bg-tertiary relative flex min-h-svh w-full items-end justify-start">
         <MediaImage

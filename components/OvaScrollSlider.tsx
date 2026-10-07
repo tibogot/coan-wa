@@ -1,13 +1,15 @@
 "use client";
 
 /**
- * OvaScrollSlider — 100svh scroll-pinned slider: headline center-left, dense tick
- * ruler on the right (Figma layout). Ticks charge top-to-bottom with scroll progress.
+ * Full-viewport pinned slider. Right-side tick ruler charges top-to-bottom
+ * like a battery, in lockstep with scroll. Each fifth of the charge is one
+ * slide — image, title, and number light up on the same progress.
  */
 
 import { useRef } from "react";
 import { gsap, useGSAP, ScrollTrigger, SplitText } from "@/lib/gsap";
 import { media } from "@/lib/media";
+import GlitchText from "@/components/GlitchText";
 
 export interface SlideItem {
   title: string;
@@ -16,8 +18,7 @@ export interface SlideItem {
 
 const defaultSlides: SlideItem[] = [
   {
-    title:
-      "A construction company,\noffering integrated\nsolution",
+    title: "A construction company,\noffering integrated\nsolution",
     image: media.vitalis.src,
   },
   {
@@ -42,8 +43,9 @@ const defaultSlides: SlideItem[] = [
   },
 ];
 
-/** Horizontal ticks — packed with gap-[2px] in the column (not justify-between). */
-const RULER_TICK_COUNT = 96;
+const TICK_COUNT = 44;
+const TICK_H_PX = 4;
+const DIM_OPACITY = 0.22;
 
 interface OvaScrollSliderProps {
   slides?: SlideItem[];
@@ -56,14 +58,19 @@ export default function OvaScrollSlider({
   const sliderImagesRef = useRef<HTMLDivElement>(null);
   const sliderTitleRef = useRef<HTMLDivElement>(null);
   const rulerRef = useRef<HTMLDivElement>(null);
+  const tickTrackRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const imagesEl = sliderImagesRef.current;
       const titleEl = sliderTitleRef.current;
       const rulerEl = rulerRef.current;
-      if (!sliderRef.current || !imagesEl || !titleEl || !rulerEl) return;
+      const trackEl = tickTrackRef.current;
+      if (!sliderRef.current || !imagesEl || !titleEl || !rulerEl || !trackEl) {
+        return;
+      }
 
+      const n = slides.length;
       let activeSlide = 0;
       let currentSplit: SplitText | null = null;
 
@@ -73,32 +80,23 @@ export default function OvaScrollSlider({
         img.src = slide.image;
       });
 
-      const ticks = rulerEl.querySelectorAll<HTMLElement>("[data-tick]");
+      const ticks = trackEl.querySelectorAll<HTMLElement>("[data-tick]");
       const labels = rulerEl.querySelectorAll<HTMLElement>("[data-label]");
-      const total = ticks.length;
-      const MIN_OPACITY = 0.18;
-      const charge = { value: 0 };
 
-      const renderRuler = () => {
-        const filled = charge.value * total;
+      const applyProgress = (progress: number) => {
+        const lit = 1 + Math.round(progress * (TICK_COUNT - 1));
 
         ticks.forEach((tick, i) => {
-          const amount = Math.min(Math.max(filled - i, 0), 1);
-          tick.style.opacity = String(MIN_OPACITY + (1 - MIN_OPACITY) * amount);
+          tick.style.opacity = i < lit ? "1" : String(DIM_OPACITY);
         });
 
+        const index = Math.min(Math.floor(progress * n), n - 1);
+
         labels.forEach((label, i) => {
-          const midpoint = ((i + 0.5) / slides.length) * total;
-          const segment = total / slides.length;
-          const reach = Math.min(
-            Math.max((filled - midpoint + segment / 2) / segment, 0),
-            1,
-          );
-          const opacity = 0.32 + 0.68 * reach;
-          label.style.opacity = String(opacity);
-          const dash = label.querySelector<HTMLElement>("[data-dash]");
-          if (dash) dash.style.opacity = String(opacity);
+          label.style.opacity = i <= index ? "1" : "0.28";
         });
+
+        return index;
       };
 
       const animateNewTitle = (index: number) => {
@@ -107,7 +105,7 @@ export default function OvaScrollSlider({
 
         const h2 = document.createElement("h2");
         h2.className =
-          "font-pp-neue-montreal whitespace-pre-line text-[clamp(2.25rem,5.2vw,4.25rem)] leading-[1.06] font-normal tracking-[-0.02em]";
+          "font-pp-neue-montreal whitespace-pre-line text-[clamp(1.75rem,3.6vw,2.75rem)] leading-[1.12] font-normal tracking-[-0.02em]";
         h2.textContent = slides[index].title;
         titleEl.appendChild(h2);
 
@@ -121,13 +119,16 @@ export default function OvaScrollSlider({
         gsap.to(currentSplit.lines, {
           yPercent: 0,
           opacity: 1,
-          duration: 0.75,
-          stagger: 0.1,
+          duration: 0.7,
+          stagger: 0.08,
           ease: "power3.out",
+          overwrite: true,
         });
       };
 
       const animateNewSlide = (index: number) => {
+        gsap.killTweensOf(imagesEl.querySelectorAll("img"));
+
         const img = document.createElement("img");
         img.src = slides[index].image;
         img.alt = "";
@@ -141,37 +142,29 @@ export default function OvaScrollSlider({
         gsap.to(img, { scale: 1, duration: 1, ease: "power2.out" });
 
         const all = imagesEl.querySelectorAll("img");
-        for (let i = 0; i < all.length - 3; i++) {
+        for (let i = 0; i < all.length - 2; i++) {
           imagesEl.removeChild(all[i]);
         }
 
         animateNewTitle(index);
       };
 
-      renderRuler();
+      applyProgress(0);
       animateNewTitle(0);
 
       const trigger = ScrollTrigger.create({
         trigger: sliderRef.current,
         start: "top top",
-        end: () => `+=${window.innerHeight * slides.length}px`,
-        scrub: 1,
+        end: () => `+=${window.innerHeight * n}px`,
+        scrub: 0.25,
         pin: true,
         pinSpacing: true,
         invalidateOnRefresh: true,
+        onRefresh: (self) => {
+          applyProgress(self.progress);
+        },
         onUpdate: (self) => {
-          gsap.to(charge, {
-            value: self.progress,
-            duration: 0.35,
-            ease: "power2.out",
-            overwrite: true,
-            onUpdate: renderRuler,
-          });
-
-          const next = Math.min(
-            Math.floor(self.progress * slides.length + 0.5),
-            slides.length - 1,
-          );
+          const next = applyProgress(self.progress);
           if (next !== activeSlide) {
             activeSlide = next;
             animateNewSlide(next);
@@ -180,7 +173,6 @@ export default function OvaScrollSlider({
       });
 
       return () => {
-        gsap.killTweensOf(charge);
         trigger.kill();
         currentSplit?.revert();
       };
@@ -203,52 +195,60 @@ export default function OvaScrollSlider({
           />
         </div>
         <div
-          className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/45 via-black/10 to-transparent"
+          className="pointer-events-none absolute inset-0 bg-black/40"
           aria-hidden
         />
       </div>
 
-      {/* Headline — vertical center, left (Figma) */}
+      <div className="absolute top-20 left-4 z-10 flex items-center gap-3 md:top-24 md:left-8 lg:left-10">
+        <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
+        <p className="font-pp-neue-montreal-mono text-xs text-white md:text-sm">
+          <GlitchText appear>OUR WORK</GlitchText>
+        </p>
+      </div>
+
       <div
         ref={sliderTitleRef}
-        className="font-pp-neue-montreal absolute top-1/2 left-4 z-10 max-w-[min(36rem,88vw)] -translate-y-1/2 text-white md:left-8 lg:left-10"
+        className="font-pp-neue-montreal absolute top-1/2 left-4 z-10 max-w-[min(52rem,72vw)] -translate-y-1/2 text-white md:left-8 lg:left-10"
         aria-live="polite"
       />
 
-      {/* Dense horizontal tick ruler + 01–05 labels */}
       <div
         ref={rulerRef}
-        className="absolute top-1/2 right-4 z-10 flex h-[min(62svh,640px)] min-h-[280px] -translate-y-1/2 items-stretch gap-2 md:right-8 md:gap-3"
+        className="absolute top-1/2 right-4 z-10 flex -translate-y-1/2 items-stretch gap-2.5 md:right-8 md:gap-3"
         aria-hidden
       >
-        <div className="relative h-full min-w-[2.5rem] md:min-w-[2.75rem]">
+        <div className="relative w-8 md:w-9">
           {slides.map((_, index) => (
             <p
               key={index}
               data-label
-              className="font-pp-neue-montreal-mono absolute right-0 flex items-center gap-2 text-[11px] leading-none text-white md:text-xs"
+              className="font-pp-neue-montreal-mono absolute right-0 flex items-center gap-1.5 text-[11px] leading-none text-white md:text-xs"
               style={{
                 top: `${((index + 0.5) / slides.length) * 100}%`,
                 transform: "translateY(-50%)",
-                opacity: 0.32,
+                opacity: index === 0 ? 1 : 0.28,
               }}
             >
               {String(index + 1).padStart(2, "0")}
-              <span
-                data-dash
-                className="h-px w-2.5 bg-white md:w-3"
-                style={{ opacity: 0.32 }}
-              />
+              <span className="h-px w-2.5 bg-current" />
             </p>
           ))}
         </div>
-        <div className="flex h-full flex-col gap-[2px] overflow-hidden">
-          {Array.from({ length: RULER_TICK_COUNT }).map((_, i) => (
+
+        <div
+          ref={tickTrackRef}
+          className="flex w-7 flex-col gap-[3px] md:w-8"
+        >
+          {Array.from({ length: TICK_COUNT }).map((_, i) => (
             <span
               key={i}
               data-tick
-              className="block h-px w-11 shrink-0 bg-white md:w-14"
-              style={{ opacity: 0.18 }}
+              className="block w-full shrink-0 bg-white"
+              style={{
+                height: TICK_H_PX,
+                opacity: i === 0 ? 1 : DIM_OPACITY,
+              }}
             />
           ))}
         </div>
