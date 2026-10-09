@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
 // Match the draft stack: ScrollTrigger + SplitText + Draggable (+ inertia for tickers)
 gsap.registerPlugin(
@@ -14,6 +16,8 @@ gsap.registerPlugin(
   SplitText,
   Draggable,
   InertiaPlugin,
+  DrawSVGPlugin,
+  MotionPathPlugin,
 );
 
 // Mobile URL-bar show/hide fires resize events; refreshing on those makes
@@ -27,4 +31,6 @@ export {
   SplitText,
   Draggable,
   InertiaPlugin,
+  DrawSVGPlugin,
+  MotionPathPlugin,
 };

@@ -36,8 +36,8 @@ type GlitchTextProps = {
 /**
  * GSAP SplitText glitch: each character flickers through random glyphs (with a
  * tiny horizontal jitter), then locks back to the real letter, left to right.
- * Plays on hover of the parent link/button, and/or when scrolled into view
- * with `appear`.
+ * Plays on hover/focus of the parent link/button (and again on leave/blur),
+ * and/or when scrolled into view with `appear`.
  */
 export default function GlitchText({
   children,
@@ -120,7 +120,9 @@ export default function GlitchText({
 
       if (!appear || linked) {
         trigger.addEventListener("mouseenter", onHover);
+        trigger.addEventListener("mouseleave", onHover);
         trigger.addEventListener("focus", onHover);
+        trigger.addEventListener("blur", onHover);
       }
 
       if (onLoad) play(false, delay);
@@ -140,7 +142,9 @@ export default function GlitchText({
 
       return () => {
         trigger.removeEventListener("mouseenter", onHover);
+        trigger.removeEventListener("mouseleave", onHover);
         trigger.removeEventListener("focus", onHover);
+        trigger.removeEventListener("blur", onHover);
         st?.kill();
         tweens.forEach((t) => t.kill());
         split.revert();

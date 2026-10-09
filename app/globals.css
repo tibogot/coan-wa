@@ -2,13 +2,13 @@
 
 :root {
   --background: #f0f0f0;
-  --foreground: #2a2c2f;
+  --foreground: #000000;
   --primary: #f0f0f0;
   --secondary: #ff5f02;
-  --tertiary: #0f121d;
-  /* Dark page surface: footer + dark home sections */
+  --tertiary: #000000;
+  /* Mid dark for specific sections (footer, what we do, map) */
   --charcoal: #2a2c2f;
-  --orange: #ff4d00;
+  --orange: #ff5f02;
 }
 
 @theme inline {
@@ -119,4 +119,28 @@ html.lenis body {
 
 .service.active .service-text {
   color: #000;
+}
+
+/* FootprintMap: soft radar pulse on map pins */
+.footprint-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: footprint-pulse 2.4s ease-out infinite;
+}
+
+@keyframes footprint-pulse {
+  from {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footprint-pulse {
+    animation: none;
+  }
 }

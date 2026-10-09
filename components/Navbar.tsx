@@ -47,9 +47,6 @@ export default function Navbar() {
     });
   };
 
-  // Transparent over the hero; soft-white once the hero has mostly scrolled away.
-  // Slide away on scroll down, slide back on scroll up (stays visible near the top
-  // and while the mobile menu is open).
   useLenis(({ scroll, direction }) => {
     const solidThreshold = Math.max(window.innerHeight * 0.7, 120);
     const nextSolid = scroll > solidThreshold;
@@ -73,7 +70,6 @@ export default function Navbar() {
     lastScrollRef.current = scroll;
   });
 
-  // Reset to the hero (transparent) look on every route change.
   useEffect(() => {
     setSolid(false);
     setIsOpen(false);
@@ -85,7 +81,6 @@ export default function Navbar() {
     }
   }, [pathname]);
 
-  // Animate menu open/close with GSAP
   useEffect(() => {
     if (!menuRef.current || !menuContainerRef.current) return;
 
@@ -158,13 +153,12 @@ export default function Navbar() {
 
   const linkTone = solid
     ? "text-foreground hover:text-secondary"
-    : "text-primary/90 hover:text-secondary";
+    : "text-primary hover:text-secondary";
 
-  // Same colors + hover as the dark page CTA (instant color swap, no fill wipe).
   const contactLinkClass =
-    "font-pp-neue-montreal-mono hidden cursor-pointer rounded-px bg-charcoal px-3.5 py-1.5 text-sm tracking-wide text-primary uppercase transition-colors duration-200 hover:bg-secondary md:inline-block";
+    "font-pp-neue-montreal-mono hidden cursor-pointer rounded-px bg-secondary px-3.5 py-1.5 text-sm tracking-wide text-primary uppercase transition-colors duration-200 hover:bg-black md:inline-block";
   const contactMobileClass =
-    "font-pp-neue-montreal-mono cursor-pointer rounded-px bg-charcoal px-4 py-3 text-base text-primary uppercase no-underline transition-colors duration-200 hover:bg-secondary";
+    "font-pp-neue-montreal-mono cursor-pointer rounded-px bg-secondary px-4 py-3 text-base text-primary uppercase no-underline transition-colors duration-200 hover:bg-black";
 
   return (
     <nav
@@ -175,9 +169,7 @@ export default function Navbar() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      {/* Top Bar - Logo, Nav, Contact */}
       <div className="flex w-full items-center">
-        {/* Left Section - Logo */}
         <div className="flex flex-1 items-center">
           <Link
             href="/"
@@ -198,7 +190,6 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Desktop Navigation - Perfectly Centered - HIDDEN ON MOBILE */}
         <div className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-8 md:flex">
           {navLinks.map((link, index) => (
             <Link
@@ -215,9 +206,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right Section - Contact Link & Mobile Button */}
         <div className="flex flex-1 items-center justify-end">
-          {/* Contact Link - Desktop Only */}
           <Link
             href="/contact"
             onMouseEnter={() => warmHero("/contact")}
@@ -228,7 +217,6 @@ export default function Navbar() {
               Contact
             </GlitchText>
           </Link>
-          {/* Mobile Menu Button - Mobile Only */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`flex cursor-pointer items-center justify-center border-none bg-transparent p-2 text-2xl transition-colors duration-500 ease-out md:hidden ${
@@ -241,7 +229,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation - Expands below */}
       <div
         ref={menuRef}
         className={`overflow-hidden transition-colors duration-500 ease-out md:hidden ${
@@ -275,3 +262,16 @@ export default function Navbar() {
     </nav>
   );
 }
+
+/* ── Orange overlay burger menu (restore if you prefer it) ─────────
+ *
+ * Desktop burger + clip-path orange panel. Not deleted.
+ *
+ * const PANEL_CLIP_CLOSED = "inset(0% 0% 100% 0%)";
+ * const PANEL_CLIP_OPEN = "inset(0% 0% 0% 0%)";
+ *
+ * Logo + two-line burger. Panel: Company / Services / Projects /
+ * Gallery / Contact in PP Neue Montreal, address + phones at the
+ * bottom, × aligned with the burger. Scroll stays unlocked.
+ * ────────────────────────────────────────────────────────────────
+ */

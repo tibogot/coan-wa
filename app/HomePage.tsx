@@ -17,6 +17,7 @@ import ServicesOverview from "@/components/ServicesOverview";
 import FAQ from "@/components/FAQ";
 import ProjectsPreview from "@/components/ProjectsPreview";
 import OvaScrollSlider from "@/components/OvaScrollSlider";
+import FootprintMap from "@/components/FootprintMap";
 
 export default function HomePage() {
   // const statsRowRef = useRef<HTMLDivElement | null>(null);
@@ -87,7 +88,7 @@ export default function HomePage() {
               className="mt-2 w-full"
             >
               <p className="font-pp-neue-montreal text-primary text-sm md:text-base">
-                Construction West Africa Unlimited
+                Construction company, Abuja, Nigeria
               </p>
             </AnimatedText>
           </div>
@@ -97,45 +98,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      <OvaScrollSlider />
-
-      <section className="bg-primary relative w-full overflow-hidden px-4 py-10 md:px-8 md:py-20">
+      <section className="bg-black relative w-full overflow-hidden px-4 py-10 md:px-8 md:py-20">
         <div className="relative z-10 mx-auto flex h-full w-full flex-col">
           <div className="mb-8 flex items-center gap-3">
             <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
-            <p className="font-pp-neue-montreal-mono text-foreground text-xs md:text-sm">
+            <p className="font-pp-neue-montreal-mono text-primary text-xs md:text-sm">
               <GlitchText appear>WHO WE ARE</GlitchText>
             </p>
           </div>
           <div className="flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-8">
             <div className="w-full text-left md:w-1/2">
               <AnimatedText>
-                <h2 className="font-pp-neue-montreal text-foreground text-left text-4xl md:text-6xl">
-                  Building the future of infrastructure across West Africa with
-                  precision and innovation.
+                <h2 className="font-pp-neue-montreal text-primary text-left text-4xl md:text-6xl">
+                  A construction company for complex civil, electrical and
+                  mechanical work.
                 </h2>
               </AnimatedText>
             </div>
             <div className="flex w-full flex-col gap-6 md:w-1/2">
               <AnimatedText>
-                <p className="font-pp-neue-montreal text-foreground mb-4 text-left text-base md:text-xl">
-                  Three decades of expertise in construction and engineering
-                  across West Africa. We deliver integrated solutions from
-                  planning to execution, transforming infrastructure and shaping
-                  the future of the region through quality, innovation, and
-                  reliability in every project we undertake. Our commitment to
-                  excellence drives us to push boundaries, embrace cutting-edge
-                  technologies, and maintain the highest standards in safety and
-                  sustainability. With a proven track record spanning major
-                  highways, urban road networks, and critical infrastructure
-                  projects, we have built lasting partnerships with communities,
-                  governments, and private sector clients.
+                <p className="font-pp-neue-montreal text-primary text-left text-base md:text-xl">
+                  COAN West Africa Limited is based in Abuja. For more than
+                  thirty years we have planned, designed, built and maintained
+                  works for public and private clients across Nigeria — roads,
+                  civil infrastructure, and the electrical and mechanical
+                  systems that make a project complete. One contractor, from
+                  first survey to handover.
                 </p>
               </AnimatedText>
-              <CtaLink href="/company" variant="split" tone="dark">
+              <AnimatedText>
+                <p className="font-pp-neue-montreal text-primary text-left text-base md:text-xl">
+                  Complex jobs need more than a single trade. We sequence
+                  civil, electrical and mechanical work on the same site, keep
+                  to programme, and finish to spec. After handover we remain
+                  available for operation and maintenance, so the asset keeps
+                  doing the job it was built for.
+                </p>
+              </AnimatedText>
+              <CtaLink href="/company" variant="split" tone="orange">
                 Learn more
               </CtaLink>
             </div>
+          </div>
+
+          <div className="relative mt-12 h-[80vh] w-full overflow-hidden md:mt-20">
+            <MediaImage
+              src={media.vitalis}
+              alt="Highway and infrastructure works in Nigeria"
+              fill
+              sizes="100vw"
+              quality={75}
+            />
           </div>
         </div>
         {/* Numbers / stats row
@@ -186,9 +199,61 @@ export default function HomePage() {
         */}
       </section>
 
+      <section className="bg-black relative w-full overflow-hidden px-4 pb-10 md:px-8 md:pb-20">
+        <div className="mb-8 flex items-center gap-3">
+          <div className="bg-secondary h-1.5 w-1.5 shrink-0" />
+          <p className="font-pp-neue-montreal-mono text-primary text-xs md:text-sm">
+            <GlitchText appear>CAPABILITIES</GlitchText>
+          </p>
+        </div>
+        <AnimatedText>
+          <h2 className="font-pp-neue-montreal text-primary mb-10 max-w-3xl text-left text-4xl md:mb-14 md:text-6xl">
+            Civil, electrical and mechanical under one roof.
+          </h2>
+        </AnimatedText>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+          {[
+            {
+              src: media.sticky1,
+              alt: "Civil engineering works",
+              title: "Civil",
+            },
+            {
+              src: media.sticky4,
+              alt: "Electrical engineering works",
+              title: "Electrical",
+            },
+            {
+              src: media.sticky3,
+              alt: "Mechanical engineering works",
+              title: "Mechanical",
+            },
+          ].map((card) => (
+            <article key={card.title} className="flex flex-col gap-4">
+              <div className="relative h-[70vh] w-full overflow-hidden">
+                <MediaImage
+                  src={card.src}
+                  alt={card.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  quality={70}
+                />
+              </div>
+              <p className="font-pp-neue-montreal text-primary text-lg md:text-xl">
+                {card.title}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <OvaScrollSlider />
+
       {/* Pinned services section
       <ServicesHero />
       */}
+
+      <FootprintMap />
 
       <VisionSection />
 

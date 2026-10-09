@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import AnimatedText from "./AnimatedText3";
+import CtaLink from "./CtaLink";
 import GlitchText from "./GlitchText";
 import { media } from "@/lib/media";
 
@@ -79,14 +79,10 @@ export default function ProjectsPreview() {
             ))}
           </div>
 
-          {/* CTA Button */}
           <div className="mt-10 md:mt-14">
-            <Link
-              href="/projects"
-              className="font-pp-neue-montreal-mono bg-secondary text-foreground hover:bg-secondary/90 inline-block w-fit cursor-pointer rounded-px px-5 py-2.5 text-xs tracking-wide uppercase transition-colors duration-200 md:px-6 md:py-3"
-            >
+            <CtaLink href="/projects" variant="split" tone="orange">
               View All Projects
-            </Link>
+            </CtaLink>
           </div>
         </div>
       </div>

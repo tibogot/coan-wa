@@ -16,11 +16,11 @@ type CtaLinkProps = {
 const toneClasses = {
   orange: {
     surface:
-      "bg-secondary text-foreground group-hover:bg-secondary/90",
+      "bg-secondary text-primary group-hover:bg-black",
   },
   dark: {
     surface:
-      "bg-charcoal text-primary group-hover:bg-secondary group-hover:text-primary",
+      "bg-black text-primary group-hover:bg-secondary group-hover:text-primary",
   },
 } as const;
 
