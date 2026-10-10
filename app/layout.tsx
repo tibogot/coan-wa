@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import RouteEffects from "@/components/RouteEffects";
 import PrefetchMedia from "@/components/PrefetchMedia";
 import Navbar from "@/components/Navbar";
+import PageLoader from "@/components/PageLoader";
 import Footer from "@/components/Footer";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-background">
         <SmoothScroll>
+          <PageLoader />
           <PrefetchMedia />
           <RouteEffects />
           <Navbar />

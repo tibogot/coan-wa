@@ -3,6 +3,7 @@ import type { StaticImageData } from "next/image";
 // Compressed WebP sources (see /public/media) — smaller decode = faster paint
 import hero from "@/public/images/hero.webp";
 import vitalis from "@/public/media/vitalis-nwenyi.webp";
+import transitionImage from "@/public/images/sticky-cards/stickycard-3.webp";
 import joshua from "@/public/media/joshua-oluwagbemiga.webp";
 import john from "@/public/media/john-kakuk.webp";
 import chuks from "@/public/media/chuks-ugwuh.webp";
@@ -21,6 +22,7 @@ import project6 from "@/public/media/projects-6.webp";
 export const media = {
   hero,
   vitalis,
+  transitionImage,
   joshua,
   john,
   chuks,
@@ -40,6 +42,7 @@ export const media = {
 /** Hero image used at the top of each primary route — prefetched on app load. */
 export const routeHeroes: Record<string, StaticImageData> = {
   "/": media.hero,
+  "/hero-v2": media.hero,
   "/company": media.chuks,
   "/services": media.sticky4,
   "/projects": media.sticky3,

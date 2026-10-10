@@ -219,7 +219,7 @@ export default function Navbar() {
           </Link>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`flex cursor-pointer items-center justify-center border-none bg-transparent p-2 text-2xl transition-colors duration-500 ease-out md:hidden ${
+            className={`flex cursor-pointer items-center justify-center border-none bg-transparent py-2 pl-2 pr-0 text-2xl transition-colors duration-500 ease-out md:hidden ${
               solid ? "text-foreground" : "text-primary"
             }`}
             aria-label="Toggle menu"

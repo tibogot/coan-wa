@@ -29,6 +29,13 @@ html,
 body {
   background: var(--background);
   color: var(--foreground);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -93,6 +100,12 @@ body {
   pointer-events: none;
   will-change: transform;
   z-index: 1;
+}
+
+/* Page loader: lock native scroll while the cover is mounted */
+html:has([data-page-loader]),
+html:has([data-page-loader]) body {
+  overflow: hidden !important;
 }
 
 /* Lenis smooth scroll */
